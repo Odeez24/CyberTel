@@ -5,21 +5,19 @@
                     "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
-html, body{
+html, body {
     height: 100%;
     margin: 0;
     display: flex;
     flex-flow: column;
 }
 
-
 body{
     font-family: var(--font-sans-serif);
-    background: no-repeat;
-    background-image: url(../src/01_new_13_erlenberg.jpg);
 }
 
 header{
+    display: flex;
     text-align: center;
     background-color: var(--cl-green-milt);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 20px 10px;
@@ -34,15 +32,14 @@ main{
     margin: 5%;
     margin-top: 1%;
     margin-bottom: 2%;
+    background: url(../src/01_new_13_erlenberg.jpg) no-repeat ;
+    background-size: cover;
 }
 
 footer{
+    display: flex;
     flex: 0 1 10px;
     text-align: center;
-}
-
-#shearchbanner {
-    background-color: #f0f0f0;
 }
 
 .box{
@@ -56,3 +53,35 @@ footer{
     text-align: center;
     align-items: center;
 }
+
+/* --- Header --- */
+#logo{
+    position: relative;
+    display: flex;
+    top: 15px;
+    left: 20px;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    width: 7%;
+    height: 115%;
+}
+
+#title{
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+
+/* --- Main --- */
+
+#shearchbanner {
+    background-color: #f0f0f0;
+}
+
+/* --- Footer --- */
