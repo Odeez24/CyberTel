@@ -1,6 +1,10 @@
 :root{
     --cl-text-white: #f0f0f0;
     --cl-green-milt: #596643;
+    --cl-marron: #553214;
+    --cl-sable: #f0dcaa;
+    --cl-beige-clair: #dcb891;
+    --cl-terre: #82562a;
     --font-sans-serif: "Segoe UI","Helvetica Neue","Noto Sans","Liberation Sans",
                     "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
@@ -17,9 +21,10 @@ body{
 }
 
 header{
+    height: 10%;
     display: flex;
     text-align: center;
-    background-color: var(--cl-green-milt);
+    background-color: var(--cl-beige-clair);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 20px 10px;
 }
 
@@ -65,18 +70,33 @@ footer{
     vertical-align: middle;
     width: 7%;
     height: 115%;
+    z-index: 999;
 }
 
 #title{
     width: auto;
     display: inline-flex;
     align-items: center;
-    vertical-align: center;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
 }
 
+h1 {
+    margin: 10px;
+}
+
+.log {
+    position: relative;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    left: 80%;
+    margin: 1%;
+    text-decoration: none;
+    font-size: 150%;
+    color: var(--cl-marron);
+}
 
 /* --- Main --- */
 
