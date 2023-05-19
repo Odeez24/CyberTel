@@ -1,0 +1,55 @@
+Script table user :
+CREATE TABLE Cybertel.`user` (
+	id_user INT UNSIGNED auto_increment NOT NULL,
+	Nom varchar(100) NOT NULL,
+	Prenom varchar(100) NOT NULL,
+	email varchar(100) NOT NULL,
+	password varchar(100) NOT NULL,
+	CONSTRAINT user_PK PRIMARY KEY (id_user)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+Script table hotel : 
+CREATE TABLE Cybertel.hotel (
+	id_hotel INT UNSIGNED auto_increment NOT NULL,
+	nom varchar(100) NOT NULL,
+	adresse varchar(100) NOT NULL,
+	qualiter INT NOT NULL,
+	CONSTRAINT hotel_PK PRIMARY KEY (id_hotel)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+Script table chambre :
+CREATE TABLE `chambre` (
+  `id_chambre` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_hotelch` int(10) unsigned NOT NULL,
+  `is_dortoir` tinyint(1) NOT NULL,
+  `prix` int(10) unsigned NOT NULL,
+  `nb_lits` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_chambre`),
+  KEY `chambre_FK` (`id_hotelch`),
+  CONSTRAINT `chambre_FK` FOREIGN KEY (`id_hotelch`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8mb4 
+COLLATE=utf8mb4_general_ci;
+
+Script table reservation :
+CREATE TABLE Cybertel.reservation (
+	id_res INT UNSIGNED auto_increment NOT NULL,
+	id_user INT UNSIGNED NOT NULL,
+	id_chambre INT UNSIGNED NOT NULL,
+	date_deb DATE NOT NULL,
+	date_fin DATE NOT NULL,
+	nb_lit INT UNSIGNED NOT NULL,
+	CONSTRAINT reservation_PK PRIMARY KEY (id_res),
+	CONSTRAINT reservation_FK FOREIGN KEY (id_user) REFERENCES Cybertel.`user`(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT reservation_FK_1 FOREIGN KEY (id_chambre) REFERENCES Cybertel.chambre(id_chambre) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;

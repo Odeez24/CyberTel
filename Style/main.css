@@ -1,10 +1,17 @@
 :root{
     --cl-text-white: #f0f0f0;
-    --cl-green-milt: #596643;
-    --cl-marron: #553214;
-    --cl-sable: #f0dcaa;
-    --cl-beige-clair: #dcb891;
-    --cl-terre: #82562a;
+    --cl-bleu-foncer: #24346E;
+    --cl-bleu-clair: #4989CF;
+    --cl-bleu-foncer-1: #2B4D9F;
+    --cl-bleu-foncer-2: #2C5EBB;
+    --cl-bleu-ultra-foncer: #110458;
+    --cl-cyan: #4688A2;
+    --cl-bleu-vert: #12B2C9;
+    --cl-vert-clair: #17ECB2;
+    --cl-rose: #C14FF1;
+    --cl-rose-foncer: #9051D2;
+    --cl-dark-violet: #721B6A;
+    --cl-jaune: #F3C038;
     --font-sans-serif: "Segoe UI","Helvetica Neue","Noto Sans","Liberation Sans",
                     "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
@@ -18,13 +25,15 @@ html, body {
 
 body{
     font-family: var(--font-sans-serif);
+    
 }
 
 header{
     height: 10%;
     display: flex;
     text-align: center;
-    background-color: var(--cl-beige-clair);
+    background: url(../src/banner.jpg);
+    background-position: center bottom;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 20px 10px;
 }
 
@@ -33,12 +42,6 @@ main{
     align-items: center;
     flex: 2 1 100px;
     flex-flow: column;
-    width: 90%;
-    margin: 5%;
-    margin-top: 1%;
-    margin-bottom: 2%;
-    background: url(../src/01_new_13_erlenberg.jpg) no-repeat ;
-    background-size: cover;
 }
 
 footer{
@@ -52,56 +55,195 @@ footer{
     flex: 0 0 auto;
     vertical-align: top;
     position: relative;
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
     padding: 5px;
     text-align: center;
     align-items: center;
 }
 
 /* --- Header --- */
-#logo{
+#lienlogo {
     position: relative;
     display: flex;
     top: 15px;
-    left: 20px;
+    left: 0.5%;
     margin: 0;
     padding: 0;
+    width: 9%;
+    height: 130%;
     vertical-align: middle;
-    width: 7%;
-    height: 115%;
+    z-index: 999;
+}
+#logo{
+    margin: 0;
+    padding: 0;
     z-index: 999;
 }
 
 #title{
     width: auto;
     display: inline-flex;
-    align-items: center;
     position: absolute;
     left: 50%;
+    top: 1%;
     transform: translate(-50%);
-}
-
-h1 {
-    margin: 10px;
+    font-size: 250%;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--cl-jaune);
 }
 
 .log {
+    background-color: var(--cl-vert-clair);
     position: relative;
     width: auto;
+    height: 50%;
     display: inline-flex;
     align-items: center;
-    left: 80%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
+    border-radius: 8px;
+    left: 75%;
+    padding: 0px 5px;
     margin: 1%;
     text-decoration: none;
     font-size: 150%;
-    color: var(--cl-marron);
+    color: var(--cl-bleu-foncer);
 }
 
 /* --- Main --- */
 
-#shearchbanner {
-    background-color: #f0f0f0;
+#mainpart{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 610px;
+    margin: 0;
+    background: url(../src/fondmain.jpg) no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+}
+
+#searchbanner {
+    top: 1%;
+    background-color: var(--cl-cyan);
+    border-radius: 8px;
+}
+
+#searchbar{
+    display: inline-flex;
+    gap: 1%;
+    margin: 0;
+}
+
+#searchbar label {
+    display: inline-flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#searchbar input{
+    text-align: left;
+    height: 30px;
+    width: 15%;
+    border-radius: 5px;
+    border: 1px solid var(--cl-border);
+    box-shadow: 1px 1px 1px #999;
+}
+
+#searchbar select{
+    text-align: left;
+    height: 30px;
+    width: 15%;
+    border-radius: 5px;
+    border: 1px solid var(--cl-border);
+    box-shadow: 1px 1px 1px #999;
+}
+
+#searchbut {
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+}
+
+#nblit {
+    width: 3% !important;
+    appearance: textfield;
+}
+
+.bandeau {
+    height: 250px;
+    width: 100%;
+    display: inline-flex;
+    position: relative;
+    top: 0;
+}
+
+#desc {
+    background-color: var(--cl-bleu-foncer-2);
+}
+
+.img {
+    position: relative;
+    width: 20%;
+    height: 90%;
+}
+
+#descimg {
+    left: 5%;
+}
+
+#desc p {
+    margin: 0;
+    position: relative;
+    left: 10%;
+}
+
+#logement {
+    background-color: var(--cl-bleu-foncer-1);
+}
+
+#logement p {
+    margin: 0;
+    position: relative;
+    left: 20%;
+}
+
+#imgchamb {
+    left: 30%;
+}
+
+#avertissement {
+    background-color: var(--cl-bleu-foncer);
+    align-items: center;
+}
+
+#police {
+    position: relative;
+    left: 5%;
+}
+
+#trauma {
+    position: relative;
+    left: 40%;
+}
+
+#avertissement img {
+    left: 20%;
 }
 
 /* --- Footer --- */
+
+footer {
+    background-color: var(--cl-bleu-foncer);
+    color: var(--cl-text-white);
+    text-align: center;
+    margin: 0;
+    padding: 0.5%;
+}
+
+footer span {
+    position: relative;
+    left: 50%;
+}
