@@ -18,6 +18,7 @@
         <main>
             <?php
                 $err = 0;
+                $firstlaunch = 0;
                 $noinfo = false;
                 if (isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"])){
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["nom"]) != 1){ unset($_POST["nom"]);}
@@ -48,26 +49,27 @@
                         $msg = $e->getMessage();
                         if ($msg == "Duplicate entry '".$_POST["email"]."' for key 'email'"){
                             unset($_POST["email"]);
-                            $err = "Account already exist.";
+                            $err = "Account already exist";
                         } else {
                             $err = $msg;
                         }
                         unset($_POST["mdp"]);
                         mysqli_close($connexion);
+                        goto fin;
                     }
-
+                    $firstlaunch = 1;
                     fin:
+                    
                 } else {
                     $noinfo = true;
                 }
-
             ?>
             <div id="validate" class="box"
-            <?php
-            if ($err != 0){
-                echo "hidden";
-            }
-            ?>>
+                <?php
+                if ($firstlaunch == 0){
+                    echo "hidden";
+                }
+                ?>>
                 <p>Félicitations, vous êtes maintenant inscrits.</p>
                 <hr>
                 <p>Connecter vous</p>
@@ -75,12 +77,11 @@
             </div>
 
             <div id="register" class="box"
-            <?php
-                if ($err == 0) {
-                    echo "hidden";
-                }
-            ?>
-            >
+                <?php
+                    if ($firstlaunch != 0) {
+                        echo "hidden";
+                    }
+                ?>>
                 <span>Register</span>
                 <form action="./" method="post" name="register">
                     <?php 
