@@ -18,10 +18,10 @@ $log = session_status();
             <a href="index.php" id="title">Cybertel</a>
             <?php
                 if ($log < 2){
-                    echo '<a id="login" class="log" href="./login">Log in</a>';
-                    echo '<a id="register" class="log" href="./register">Register</a>';
+                    echo '<a id="login" class="log" href="./login">Se connecter</a>';
+                    echo '<a id="register" class="log" href="./register">S\'inscrire</a>';
                 }else {
-                    echo '<a id="account" class="log" href="./account">'.$_SESSION["name"].$_SESSION["prenom"].'</a>';
+                    echo '<a id="account" class="log" href="./account">'.$_SESSION["nom"].$_SESSION["prenom"].'</a>';
                 }
             ?>
         </header>

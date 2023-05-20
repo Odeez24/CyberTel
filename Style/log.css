@@ -51,13 +51,6 @@ footer{
     text-align: center;
 }
 
-.box{
-    vertical-align: top;
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
-    padding: 5px;
-}
-
 .err{
     background-color: rgba(255, 0, 0, 0.2);
     border-radius: 10px;
@@ -110,29 +103,33 @@ main {
     padding: 2%;
 }
 
-#register{
+.boxlog{
+    vertical-align: top;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+    padding: 5px;
     text-align: center;
     flex-direction: column;
     background-color: var(--cl-bleu-vert);
     border-radius: 8px;
     gap: 1%;
     margin: 0;
-    width: auto;
+    width: 80%;
     max-width: 30em;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
 }
 
-#register span{
+.boxlog span{
     font-size: 150%;
 }
 
-#register form{
+.boxlog form{
     align-items: center;
 }
 
-#register input {
+.boxlog input {
     display: block;
     text-align: left;
     border-radius: 5px;
@@ -145,7 +142,7 @@ main {
     margin-right: auto;
 }
 
-#register button {
+.boxlog button {
     width: 50%;
     height: 20px;
     border-radius: 5px;
@@ -154,7 +151,7 @@ main {
     border: var(--cl-border);
 }
 
-#login {
+.login {
     display: block;
     text-decoration: none;
     width: 50%;
@@ -167,7 +164,11 @@ main {
     border: var(--cl-border);
 }
 
-#validate {
+.validate {
+    vertical-align: top;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+    padding: 5px;
     background-color: var(--cl-bleu-clair);
     text-align: center;
 }

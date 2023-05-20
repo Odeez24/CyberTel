@@ -4,9 +4,7 @@
         <title>Cybertel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="../script/register.js"></script>
-        <script src="../script/jquery-3.7.0.min.js"></script>
-        <link href="../Style/register.css" rel="stylesheet">
+        <link href="../Style/log.css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -20,6 +18,7 @@
                 $err = 0;
                 $firstlaunch = 0;
                 $noinfo = false;
+                echo "test1";
                 if (isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"])){
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["nom"]) != 1){ unset($_POST["nom"]);}
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["prenom"]) != 1){ unset($_POST["prenom"]);}   if (preg_match("/^.{0,128}$/", $_POST["email"]) != 1){ unset($_POST["email"]);}
@@ -30,41 +29,41 @@
                         $err = "Bad Format";
                         goto fin;
                     }
-                    include "../src/mysql.php";
+                    echo "test2";
                     try {
-                        $connexion = mysqli_connect(MYSQL_HOST, MYSQL_LOG, MYSQL_PWD, MYSQL_DB);
-                    } catch (Exception $e){
+                        echo "test5";
+                        $s1 = MYSQL_HOST;
+                        $s2 = MYSQL_LOG;
+                        
+                        echo "test6";
+                        $connexion = new PDO ($ser, MYSQL_PWD, MYSQL_DB);
+                        echo "test4";
+                    } catch (PDOException $e){
+                        echo "test5";
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    if (mysqli_connect_error() != null){
-                        $err = "Internal Serveur error.";
-                        mysqli_close($connexion);
-                        goto fin;
-                    }
-
-                    try {
-                        mysqli_query($connexion, "INSERT INTO user (nom, prenom, email, password, tel) VALUES ('{$_POST["nom"]}', '{$_POST["prenom"]}', '{$_POST["email"]}', '{$_POST["mdp"]}', '{$_POST["tel"]}')");
-                    } catch (Exception $e) {
-                        $msg = $e->getMessage();
-                        if ($msg == "Duplicate entry '".$_POST["email"]."' for key 'email'"){
-                            unset($_POST["email"]);
-                            $err = "Account already exist";
-                        } else {
-                            $err = $msg;
-                        }
+                    echo "test3";
+                    $req = "INSERT INTO user (nom, prenom, email, password, tel) VALUES (?, ?, ?, ?, ?)";
+                    $res = $connexion->prepare($req);
+                    $_POST["mdp"] = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+                    $res->execute(['{$_POST["nom"]}', '{$_POST["prenom"]}', '{$_POST["email"]}', '{$_POST["mdp"]}', '{$_POST["tel"]}']);
+                    if (!$res->execute()){
+                        unset($res);
+                        unset($connexion);
+                        $err = "Duplicate entry '".$_POST["email"]."' for key 'email'";
+                        unset($_POST["email"]);
                         unset($_POST["mdp"]);
-                        mysqli_close($connexion);
                         goto fin;
                     }
+                    echo "test4";
                     $firstlaunch = 1;
                     fin:
-                    
                 } else {
                     $noinfo = true;
                 }
             ?>
-            <div id="validate" class="box"
+            <div class="validate"
                 <?php
                 if ($firstlaunch == 0){
                     echo "hidden";
@@ -73,16 +72,16 @@
                 <p>Félicitations, vous êtes maintenant inscrits.</p>
                 <hr>
                 <p>Connecter vous</p>
-                <a id="login" href="../login">Login</a>
+                <a class="login" href="../login">Se connecter</a>
             </div>
 
-            <div id="register" class="box"
+            <div class="boxlog"
                 <?php
                     if ($firstlaunch != 0) {
                         echo "hidden";
                     }
                 ?>>
-                <span>Register</span>
+                <span>S'inscrire</span>
                 <form action="./" method="post" name="register">
                     <?php 
                         if ($err != 0){
@@ -137,12 +136,11 @@
                         echo "class=\"err\"";
                     }
                     ?>required>
-                    <button type="submit">Register</button>
+                    <button type="submit">S'inscrire</button>
                 </form>
-
             <hr>
             <p>Vous avez déjà un compte ?</p>
-            <a id="login" href="../login">Login</a>
+            <a class="login" href="../login">Se connecter</a>
             </div>
         </main>
         <footer>
