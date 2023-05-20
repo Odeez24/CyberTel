@@ -1,0 +1,188 @@
+:root{
+    --cl-text-white: #f0f0f0;
+    --cl-bleu-foncer: #24346E;
+    --cl-bleu-clair: #4989CF;
+    --cl-bleu-foncer-1: #2B4D9F;
+    --cl-bleu-foncer-2: #2C5EBB;
+    --cl-bleu-ultra-foncer: #110458;
+    --cl-cyan: #4688A2;
+    --cl-bleu-vert: #12B2C9;
+    --cl-vert-clair: #17ECB2;
+    --cl-rose: #C14FF1;
+    --cl-rose-foncer: #9051D2;
+    --cl-dark-violet: #721B6A;
+    --cl-jaune: #F3C038;
+    --cl-rouge-err: #D40011;
+    --font-sans-serif: "Segoe UI","Helvetica Neue","Noto Sans","Liberation Sans",
+                    "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+}
+
+body{
+    font-family: var(--font-sans-serif);
+    
+}
+
+header{
+    height: 10%;
+    display: flex;
+    text-align: center;
+    background: url(../src/banner.jpg);
+    background-position: center bottom;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 20px 10px;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    flex: 2 1 100px;
+    flex-flow: column;
+}
+
+footer{
+    display: flex;
+    flex: 0 1 10px;
+    text-align: center;
+}
+
+.box{
+    vertical-align: top;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+    padding: 5px;
+}
+
+.err{
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.errmsg {
+    color: var(--cl-bleu-ultra-foncer);
+    font-weight: bold;
+}
+
+/* --- Header --- */
+#lienlogo {
+    position: relative;
+    display: flex;
+    top: 15px;
+    left: 0.5%;
+    margin: 0;
+    padding: 0;
+    width: 9%;
+    height: 130%;
+    vertical-align: middle;
+    z-index: 999;
+}
+#logo{
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+}
+
+#title{
+    width: auto;
+    display: inline-flex;
+    position: absolute;
+    left: 50%;
+    top: 1%;
+    transform: translate(-50%);
+    font-size: 250%;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--cl-jaune);
+}
+
+/* --- Main --- */
+
+main {
+    background: url(../src/registerfond.png);
+    background-position: center bottom;
+    background-size: cover;
+    align-items: center;
+    padding: 2%;
+}
+
+#register{
+    text-align: center;
+    flex-direction: column;
+    background-color: var(--cl-bleu-vert);
+    border-radius: 8px;
+    gap: 1%;
+    margin: 0;
+    width: auto;
+    max-width: 30em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+#register span{
+    font-size: 150%;
+}
+
+#register form{
+    align-items: center;
+}
+
+#register input {
+    display: block;
+    text-align: left;
+    border-radius: 5px;
+    border: 1px solid var(--cl-border);
+    box-shadow: 1px 1px 1px #999;
+    margin-bottom: 20px;
+    width: 80%;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#register button {
+    width: 50%;
+    height: 20px;
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+}
+
+#login {
+    display: block;
+    text-decoration: none;
+    width: 50%;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+}
+
+#validate {
+    background-color: var(--cl-bleu-clair);
+    text-align: center;
+}
+
+/* --- Footer --- */
+
+footer {
+    background-color: var(--cl-bleu-foncer);
+    color: var(--cl-text-white);
+    text-align: center;
+    margin: 0;
+    padding: 0.5%;
+}
+
+footer span {
+    position: relative;
+    left: 50%;
+}

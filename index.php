@@ -2,7 +2,7 @@
 $log = session_status();
 ?>
 
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE <!DOCTYPE html5>
 <html lang="fr">
     <head>
         <title>Cybertel</title>
@@ -12,16 +12,16 @@ $log = session_status();
     </head>
     <body>
         <header>
-            <a href="index.html" id="lienlogo">
+            <a href="index.php" id="lienlogo">
                 <img id="logo" src="./src/logo.jpg" alt="Logo Cybertel"></img>
             </a>
-            <a href="index.html" id="title">Cybertel</a>
+            <a href="index.php" id="title">Cybertel</a>
             <?php
                 if ($log < 2){
-                    echo "<a id=\"login\" class=\"log\" href=\"./login\">Log in</a>";
-                    echo "<a id=\"register\" class=\"log\" href=\"./register\">Register</a>";
+                    echo '<a id="login" class="log" href="./login">Log in</a>';
+                    echo '<a id="register" class="log" href="./register">Register</a>';
                 }else {
-                    echo "<a id=\"account\" class=\"log\" href=\"./account\">{$_SESSION['name']} {$_SESSION['prenom']}</a>";
+                    echo '<a id="account" class="log" href="./account">'.$_SESSION["name"].$_SESSION["prenom"].'</a>';
                 }
             ?>
         </header>
