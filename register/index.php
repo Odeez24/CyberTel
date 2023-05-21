@@ -1,3 +1,10 @@
+<?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+?>
+
+
 <!DOCTYPE <!DOCTYPE html5>
 <html lang="fr">
     <head>
@@ -20,33 +27,28 @@
                 $err = 0;
                 $firstlaunch = 0;
                 $noinfo = false;
-                echo "test1";
                 if (isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"])){
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["nom"]) != 1){ unset($_POST["nom"]);}
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["prenom"]) != 1){ unset($_POST["prenom"]);}   if (preg_match("/^.{0,128}$/", $_POST["email"]) != 1){ unset($_POST["email"]);}
                     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){ unset($_POST["email"]);}
-                    if (preg_match("/^/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/", $_POST["mdp"]) != 1){ unset($_POST["msp"]);}
+                    if (preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/", $_POST["mdp"]) != 1){ unset($_POST["msp"]);}
                     if (preg_match("/^((\+|00)33\s?|0)[67](\s?\d{2}){4}$/", $_POST["tel"]) != 1){unset($_POST["tel"]);}
                     if (!isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"])){
                         $err = "Bad Format";
                         goto fin;
                     }
-                    echo "test2";
+                    include "../src/mysql.php";
                     try {
-                        echo "test5";
                         $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
-                        echo "test4";
                     } catch (PDOException $e){
-                        echo "test5";
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    echo "test3";
                     $req = "INSERT INTO user (nom, prenom, email, password, tel) VALUES (?, ?, ?, ?, ?)";
                     $res = $connexion->prepare($req);
                     $_POST["mdp"] = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
-                    $res->execute(['{$_POST["nom"]}', '{$_POST["prenom"]}', '{$_POST["email"]}', '{$_POST["mdp"]}', '{$_POST["tel"]}']);
-                    if (!$res->execute()){
+                    $bool=  $res->execute([$_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"]]);
+                    if (!$bool){
                         unset($res);
                         unset($connexion);
                         $err = "Duplicate entry '".$_POST["email"]."' for key 'email'";

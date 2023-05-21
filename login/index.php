@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+?>
+
 <!DOCTYPE <!DOCTYPE html5>
 <html lang="fr">
     <head>
@@ -23,44 +30,43 @@
                 if (isset($_POST["email"], $_POST["mdp"])){
                     include "../src/mysql.php";
                     try {
-                        $connexion = new PDO (DSN, MYSQL_LOG, MYSQL_PWD);
+                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
                     } catch (PDOException $e){
+                        session_destroy();
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "SELECT * FROM account WHERE email = '{$_POST["email"]}';";
+                    $req = "SELECT * FROM user WHERE email = '{$_POST["email"]}';";
                     $res = $connexion->prepare($req);
-                    if (!$res->execute()){
+                    $bool =  $res->execute();
+                    if (!$bool){
+                        session_destroy();
                         unset($res);
                         unset($connexion);
                         $err = "Error during server communication";
                         goto fin;
                     }
-                    if (count($res->fetch()) == 0){
+                    $account = $res->fetch();
+                    if (count($account) == 0){
+                        session_destroy();
                         unset($res);
                         unset($connexion);
                         $err = "Mauvais email";
                         goto fin;
                     }
-                    $account = $res->fetch();
-                    if (!password_verify($account["password"], $_POST["mdp"])){
+                    if (!password_verify($_POST["mdp"], $account["password"])){
+                        session_destroy();
                         unset($res);
                         unset($connexion);
                         $err = "Mauvais mot de passe";
                         goto fin;
                     }
-
-                    session_start();
-
                     $_SESSION ["nom"] = $account["nom"];
                     $_SESSION ["prenom"] = $account["prenom"];
                     $_SESSION ["email"] = $account["email"];
                     $_SESSION ["tel"] = $account["tel"];
                     unset($res);
                     unset($connexion);
-                    $log = session_status();
-                    echo $log;
-                    echo "test22";
                     $firstlaunch = 1;
                     fin:
                 } else {
@@ -78,9 +84,18 @@
                 <p>Votre compte</p>
                 <a class="login" href="../account">Votre compte</a>
             </div>
-            <div class="boxlog">
+            <div class="boxlog" <?php
+                    if ($firstlaunch != 0) {
+                        echo "hidden";
+                    }
+                ?>>
                 <span>Se connecter</span>
                 <form name="login" action="./" method="post">
+                    <?php 
+                        if ($err != 0){
+                            echo "<p class=\"err errmsg\">".$err."</p>";
+                        }
+                    ?>
                     <label for="email">Adresse mail</label>
                     <input type="email" name="email"
                     <?php 
