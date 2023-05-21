@@ -7,4 +7,7 @@
 
     define("MYSQL_DB", "Cybertel");
 
+    define("DSN", "mysql:host=localhost;")
+
+
 ?>

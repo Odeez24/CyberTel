@@ -164,6 +164,23 @@ main {
     border: var(--cl-border);
 }
 
+.eyes {
+    width: 35px;
+    height: 35px;
+}
+
+#regeyes {
+    position: absolute;
+    top: 56%;
+    left: 80%;
+}
+
+#logeyes {
+    position: absolute;
+    top: 44%;
+    left: 80%;
+}
+
 .validate {
     vertical-align: top;
     position: relative;

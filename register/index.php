@@ -4,6 +4,8 @@
         <title>Cybertel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../script/jquery-3.7.0.min.js"></script>
+        <script src="../script/log.js"></script>
         <link href="../Style/log.css" rel="stylesheet">
     </head>
     <body>
@@ -32,11 +34,7 @@
                     echo "test2";
                     try {
                         echo "test5";
-                        $s1 = MYSQL_HOST;
-                        $s2 = MYSQL_LOG;
-                        
-                        echo "test6";
-                        $connexion = new PDO ($ser, MYSQL_PWD, MYSQL_DB);
+                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
                         echo "test4";
                     } catch (PDOException $e){
                         echo "test5";
@@ -127,6 +125,7 @@
                         echo "class=\"err\"";
                     }
                     ?>required>
+                    <img src="../src/closeeyes.jpg" id="regeyes" class="eyes" onclick="viewmdpreg()">
                     <input type="tel" id="tel" name="tel" placeholder="(0x ou +33)" pattern="((\+|00)33\s?|0)[67](\s?\d{2}){4}$"
                     <?php 
                     if (isset($_POST["tel"])){

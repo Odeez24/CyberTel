@@ -4,6 +4,8 @@
         <title>Cybertel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../script/jquery-3.7.0.min.js"></script>
+        <script src="../script/log.js"></script>
         <link href="../Style/log.css" rel="stylesheet">
     </head>
     <body>
@@ -21,8 +23,7 @@
                 if (isset($_POST["email"], $_POST["mdp"])){
                     include "../src/mysql.php";
                     try {
-                        $ser = MYSQL_HOST; MYSQL_LOG;
-                        $connexion = new PDO ($ser, MYSQL_PWD, MYSQL_DB);
+                        $connexion = new PDO (DSN, MYSQL_LOG, MYSQL_PWD);
                     } catch (PDOException $e){
                         $err = "Error during server connection";
                         goto fin;
@@ -91,7 +92,7 @@
                     }
                     ?> required>
                     <label for="mdp">Mot de passe</label>
-                    <input type="password" name="mdp"
+                    <input type="password" name="mdp" id="mdp"
                     <?php 
                     if (isset($_POST["mdp"])){
                         $a = $_POST["mdp"];
@@ -100,6 +101,7 @@
                         echo "class=\"err\"";
                     }
                     ?> required>
+                    <img src="../src/closeeyes.jpg" id="logeyes" class="eyes" onclick="viewmdp()">
                     <button type="submit">Se connecter</button>
                 </form>
                 <hr>
