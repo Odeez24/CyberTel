@@ -1,6 +1,5 @@
 <?php
-session_start();
-$log = session_status();
+    session_start();
 ?>
 
 <!DOCTYPE <!DOCTYPE html5>
@@ -18,11 +17,11 @@ $log = session_status();
             </a>
             <a href="index.php" id="title">Cybertel</a>
             <?php
-                if ($log == PHP_SESSION_DISABLED || $log == PHP_SESSION_NONE){
+                if (!isset($_SESSION["nom"])){
                     echo '<a id="login" class="log" href="./login">Se connecter</a>';
                     echo '<a id="register" class="log" href="./register">S\'inscrire</a>';
                 }else {
-                    echo '<a id="account" class="log" href="./account">'.$_SESSION["nom"]  .$_SESSION["prenom"].'</a>';
+                    echo '<a id="account" class="log" href="./account">'.$_SESSION["nom"].' '.$_SESSION["prenom"].'</a>';
                 }
             ?>
         </header>
@@ -32,7 +31,7 @@ $log = session_status();
                     <p>
                         Trouver votre hôtel parfait dans toute la France.
                     </p>
-                    <form id="searchbar" action="search.php" method="post">
+                    <form id="searchbar" action="./search" method="post">
                         <input type="text" id="name" placeholder="Destination">
                         <select id="classification">
                             <option>Qualité de l'hôtel</option>

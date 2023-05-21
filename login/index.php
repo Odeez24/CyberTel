@@ -65,6 +65,7 @@
                     $_SESSION ["prenom"] = $account["prenom"];
                     $_SESSION ["email"] = $account["email"];
                     $_SESSION ["tel"] = $account["tel"];
+                    $_SESSION ["mdp"] = $account["password"];
                     unset($res);
                     unset($connexion);
                     $firstlaunch = 1;

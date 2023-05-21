@@ -42,6 +42,9 @@ main{
     align-items: center;
     flex: 2 1 100px;
     flex-flow: column;
+    background: url(../src/registerfond.png) no-repeat;
+    background-position: center bottom;
+    background-size: cover;
 }
 
 footer{
@@ -112,6 +115,79 @@ footer{
 
 /* --- Main --- */
 
+#notconnect {
+    background-color: var(--cl-cyan);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+#infoperso {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 250px;
+    margin: 0;
+    background-color: var(--cl-bleu-clair);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+#info {
+    display: inline-flex;
+    gap: 5%;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+#info p {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+    padding: 5px;
+    margin: 15px;
+}
+
+#changemdp{
+    display: inline-flex;
+    gap: 5%;
+    text-align: left;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#changemdp input{
+    text-align: left;
+    border-radius: 5px;
+    width: 15%;
+    height: 40px;
+}
+
+.eyes {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+}
+
+#existeyes {
+    top: 78%;
+    left: 30.4%;
+}
+
+#neweyes {
+    top: 78%;
+    left: 54.5%;
+}
+
+#neweyes2 {
+    top: 78%;
+    left: 79.8%;
+}
+
+
 #mainpart{
     display: flex;
     align-items: center;
@@ -124,7 +200,18 @@ footer{
     background-size: cover;
 }
 
-
+.login {
+    display: block;
+    text-decoration: none;
+    width: 50%;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+}
 /* --- Footer --- */
 
 footer {
