@@ -31,11 +31,18 @@
 }
 
 @font-face {
-  font-family: 'kosan';
+  font-family: 'sunset';
   font-style: normal;
   font-weight: normal;
-  src: url(../src/KosanNonCommercial.otf);
+  src: url(../src/Sunset\ Club\ Free\ Trial-9706.woff);
 }
+
+@font-face {
+    font-family: 'kosan';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../src/KosanNonCommercial.otf);
+  }
 
 :root{
     --cl-text-white: #f0f0f0;
@@ -65,7 +72,7 @@ html, body {
 }
 
 body{
-    font-family: kosan;
+    font-family: 'kosan';
 }
 
 header{

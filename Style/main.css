@@ -33,6 +33,7 @@
 }
 
 #searchbar{
+    font-family: 'kosan';
     display: inline-flex;
     gap: 1%;
     margin: 0;
@@ -44,7 +45,7 @@
 }
 
 #searchbar input{
-    font-family: kosan;
+    font-family: 'kosan';
     text-align: left;
     width: 15%;
     border-radius: 5px;
@@ -78,6 +79,7 @@
     display: inline-flex;
     position: relative;
     top: 0;
+    font-style: 'sunset';
 }
 
 #desc {
@@ -89,7 +91,7 @@
     position: relative;
     left: 10%;
     width: 65%;
-    color: var(--cl-dark-dark-violet);
+    color: var(--cl-bleu-clair-clair);
 }
 
 .img {
@@ -115,7 +117,7 @@
     position: relative;
     left: 10%;
     width: 55%;
-    color: var(--cl-deep-violet);
+    color: var(--cl-bleu-clair-clair);
 }
 
 #imgchamb {

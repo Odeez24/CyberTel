@@ -79,6 +79,49 @@
                         echo "hidden";
                     }
                 ?>>
+                <?php
+                    $err = 0;
+                    include "../src/mysql.php";
+                    try {
+                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
+                    } catch (PDOException $e){
+                        session_destroy();
+                        $err = "Error during server connection";
+                        goto fin;
+                    }
+                    $req = "SELECT * FROM reservation WHERE id_user = (SELECT id_user FROM user WHERE email = '{$_SESSION["email"]}')";
+                    $res = $connexion->prepare($req);
+                    $bool =  $res->execute();
+                    if (!$bool){
+                        session_destroy();
+                        unset($res);
+                        unset($connexion);
+                        $err = "Error during server communication";
+                        goto fin;
+                    }
+                    $resv = $res->fetchAll();
+                    if (count($resv) == 0){
+                        unset($resv);
+                        unset($connexion);
+                        echo '
+                        <div id="nores" class="box">
+                            <p>Vous n\'avez pas de réservation !</p>
+                            <hr>
+                            <p>Si vous voulez resérver une chambre veillez vous rentre sur cette page</p>
+                            <a href="../search" class="login">Reserver votre chambre !</a>
+                        </div>';
+                        goto fin;
+                    } else {
+                        foreach ($resv as $ch) {
+
+                        }
+                    }
+
+                    fin:
+                ?>
+                <article class="res">
+                    <img src="../src/img/"
+                </article>
             </div>
         </main>
         <footer>
