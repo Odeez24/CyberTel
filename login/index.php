@@ -14,13 +14,14 @@
         <script src="../script/jquery-3.7.0.min.js"></script>
         <script src="../script/log.js"></script>
         <link href="../Style/log.css" rel="stylesheet">
+        <link href="../Style/base.css" rel="stylesheet">
     </head>
     <body>
         <header>
             <a href="../index.php" id="lienlogo">
                 <img id="logo" src="../src/logo.jpg" alt="Logo Cybertel"></img>
             </a>
-            <a href="../index.php" id="title">Cybertel</a>
+            <a href="../index.php" id="title" class="neonText">Cybertel</a>
         </header>
         <main>
             <?php

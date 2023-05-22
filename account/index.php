@@ -15,13 +15,14 @@
         <script src="../script/jquery-3.7.0.min.js"></script>
         <script src="../script/account.js"></script>
         <link href="../Style/account.css" rel="stylesheet">
+        <link href="../Style/base.css" rel="stylesheet">
     </head>
     <body>
         <header>
             <a href="../index.php" id="lienlogo">
                 <img id="logo" src="../src/logo.jpg" alt="Logo Cybertel"></img>
             </a>
-            <a href="../index.php" id="title">Cybertel</a>
+            <a href="../index.php" id="title" class="neonText">Cybertel</a>
             <?php
                 if (isset($_SESSION["nom"])) {
                     echo '<a id="account" class="log" href="./account">'.$_SESSION["nom"].' '.$_SESSION["prenom"].'</a>';
@@ -29,12 +30,12 @@
             ?>
         </header>
         <main>
-            <div id="notconnect" hidden
+            <div id="notconnect" 
                 <?php
                     if (isset($_SESSION["nom"])) {
                         echo "hidden";
                     }
-                ?> class="box">
+                ?>>
                 <p>Vous n'êtes pas connecter !</p>
                 <hr>
                 <p>Vous avez déjà un compte ?</p>

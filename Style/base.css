@@ -1,0 +1,155 @@
+.neonText {
+  animation: flicker 4s infinite alternate;
+  color: #fff;
+}
+
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 7px #fff,
+      0 0 14px #fff,
+      0 0 20px #0fa,
+      0 0 40px #0fa,
+      0 0 45px #0fa,
+      0 0 50px #0fa,
+      0 0 75px #0fa;
+  
+  }
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
+
+@font-face {
+    font-family: 'neon';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../src/NeonFuture.ttf);
+}
+
+@font-face {
+  font-family: 'kosan';
+  font-style: normal;
+  font-weight: normal;
+  src: url(../src/KosanNonCommercial.otf);
+}
+
+:root{
+    --cl-text-white: #f0f0f0;
+    --cl-bleu-clair-clair: #6BE8F7;
+    --cl-bleu-foncer: #24346E;
+    --cl-bleu-clair: #4989CF;
+    --cl-bleu-foncer-1: #2B4D9F;
+    --cl-bleu-foncer-2: #2C5EBB;
+    --cl-bleu-ultra-foncer: #110458;
+    --cl-cyan: #4688A2;
+    --cl-bleu-vert: #12B2C9;
+    --cl-vert-clair: #17ECB2;
+    --cl-rose: #982E62;
+    --cl-rose-foncer: #621B6A;
+    --cl-dark-violet: #502545;
+    --cl-deep-violet: #48023C;
+    --cl-dark-dark-violet: #3A243B;
+    --cl-jaune: #FEFE00;
+    --font-neon: neon;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+}
+
+body{
+    font-family: kosan;
+}
+
+header{
+    height: 10%;
+    display: flex;
+    text-align: center;
+    background: url(../src/banner.jpg);
+    background-position: center bottom;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 20px 10px;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    flex: 2 1 100px;
+    flex-flow: column;
+}
+
+footer{
+    display: flex;
+    flex: 0 1 10px;
+    text-align: center;
+}
+
+/* --- Header --- */
+#lienlogo {
+    position: relative;
+    display: flex;
+    top: 15px;
+    left: 0.5%;
+    margin: 0;
+    padding: 0;
+    width: 9%;
+    height: 130%;
+    vertical-align: middle;
+    z-index: 999;
+}
+#logo{
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+}
+
+#title{
+  font-family: 'neon';
+    width: auto;
+    display: inline-flex;
+    position: absolute;
+    left: 50%;
+    top: 1%;
+    transform: translate(-50%);
+    font-size: 250%;
+    text-decoration: none;
+    color: var(--cl-jaune);
+}
+
+.log {
+    background-color: var(--cl-vert-clair);
+    position: relative;
+    width: auto;
+    height: 50%;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
+    border-radius: 8px;
+    left: 70%;
+    padding: 0px 5px;
+    margin: 1%;
+    text-decoration: none;
+    font-size: 150%;
+    color: var(--cl-bleu-foncer);
+}
+
+/* --- Footer --- */
+
+footer {
+    background-color: var(--cl-bleu-foncer);
+    color: var(--cl-text-white);
+    text-align: center;
+    margin: 0;
+    padding: 0.5%;
+}
+
+footer span {
+    position: relative;
+    left: 50%;
+}
