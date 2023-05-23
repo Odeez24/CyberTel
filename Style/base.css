@@ -136,9 +136,9 @@ footer{
     height: 50%;
     display: inline-flex;
     align-items: center;
+    left: 40em;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
     border-radius: 8px;
-    left: 70%;
     padding: 0px 5px;
     margin: 1%;
     text-decoration: none;

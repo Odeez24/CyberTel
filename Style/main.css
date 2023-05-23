@@ -37,7 +37,7 @@
     display: inline-flex;
     gap: 1%;
     margin: 0;
-    width: 70%;
+    width: 80%;
 }
 
 #searchbar label {
@@ -47,7 +47,7 @@
 #searchbar input{
     font-family: 'kosan';
     text-align: left;
-    width: 15%;
+    width: 25%;
     border-radius: 5px;
     border: 1px solid var(--cl-border);
     box-shadow: 1px 1px 1px #999;
@@ -55,7 +55,7 @@
 
 #searchbar select{
     text-align: left;
-    width: 15%;
+    width: 25%;
     border-radius: 5px;
     border: 1px solid var(--cl-border);
     box-shadow: 1px 1px 1px #999;
@@ -69,7 +69,7 @@
 }
 
 #nblit {
-    width: 3% !important;
+    width: 5% !important;
     appearance: textfield;
 }
 

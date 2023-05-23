@@ -25,9 +25,10 @@
             <a href="../index.php" id="title" class="neonText">Cybertel</a>
             <?php
                 if (isset($_SESSION["nom"])) {
-                    echo '<a id="account" class="log" href="./account">'.$_SESSION["nom"].' '.$_SESSION["prenom"].'</a>';
+                    echo '<a id="account" class="log" id="loga" href="./account">'.$_SESSION["nom"].' '.$_SESSION["prenom"].'</a>';
                 }
             ?>
+            <a href="../logout/logout.php" class="log" id="logout">Déconnexion</a>
         </header>
         <main>
             <div id="notconnect" 
@@ -56,19 +57,17 @@
                         <p>Prenom : <?php echo $_SESSION["prenom"]?></p>
                         <p>Email : <?php echo $_SESSION["email"]?></p>
                         <p>Téléphone : <?php echo $_SESSION["tel"]?></p>
+                        <p>Adresse : <?php echo $_SESSION["adresse"]?></p>
                     </div>
                     <p>Changer de mot de passe</p>
+                    <p>Minimum 8 caractères, au moins une majuscule, une minuscule et une lettre</p>
                     <div id="changemdp">
                         <form action="./" method="post">
-                            <label for="existmdp">Ancien mot de passe</label>
-                            <input type="password" id="existmdp"name="existmdp">
-                            <img src="../src/closeeyes.jpg" id="existeyes" class="eyes" onclick="viewmdpex()">
-                            <label for="newmdp">Nouveaux mot de passe</label>
-                            <input type="password" id="newmdp"name="newmdp">
-                            <img src="../src/closeeyes.jpg" id="neweyes" class="eyes" onclick="viewmdpnew()">
-                            <label for="newmdp2">Confirmation mot de passe</label>
-                            <input type="password" id="newmdp2"name="newmdp2">
-                            <img src="../src/closeeyes.jpg" id="neweyes2" class="eyes" onclick="viewmdpnew2()">
+                            <input type="password" id="existmdp"name="existmdp" placeholder="Ancien mot de passe" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$">
+                            <input type="password" id="newmdp"name="newmdp" placeholder="Nouveaux mot de passe" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$">
+                            <input type="password" id="newmdp2"name="newmdp2" placeholder="Confirmation" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$">
+                            <img src="../src/closeeyes.jpg" id="eyes" onclick="viewmdp()">
+                            <button type="submit">Changer</button>
                         </form>
                     </div>
                 </div>
@@ -99,9 +98,9 @@
                         $err = "Error during server communication";
                         goto fin;
                     }
-                    $resv = $res->fetchAll();
-                    if (count($resv) == 0){
-                        unset($resv);
+                    $allresv = $res->fetchAll();
+                    if (count($allresv) == 0){
+                        unset($allresv);
                         unset($connexion);
                         echo '
                         <div id="nores" class="box">
@@ -112,16 +111,52 @@
                         </div>';
                         goto fin;
                     } else {
-                        foreach ($resv as $ch) {
-
+                        echo '<div id="rest" class="box">
+                            <p>Vos réservations</p>
+                            <hr>';
+                        foreach ($allresv as $resv) {
+                            echo '<article class="res">';
+                            $reqch = "SELECT * FROM Chambre WHERE id_chambre = '{$resv["id_chambre"]}';";
+                            $resch = $connexion->prepare($reqch);
+                            $boolch =  $resch->execute();
+                            $reqhotel = "SELECT * FROM Hotel WHERE id_hotel = '{$chambre["id_hotel"]}';";
+                            $reshotel = $connexion->prepare($reqhotel);
+                            $boolho =  $reshotel->execute();
+                            if (!$boolch || !$boolho){
+                                session_destroy();
+                                unset($resch);
+                                unset($reshotel);
+                                unset($connexion);
+                                echo "Error during server communication";
+                                goto fin;
+                            }
+                            $chambre = $resch->fetch();
+                            $hotel = $reshotel->fetch();
+                            echo '<img src="../src/imgchambre/".$chambre[\"img\"].".jpg" alt="Image de la chambre" class="imgres">
+                                <div class="infores">
+                                    <p>Hôtel : '.$hotel["nom"].'</p>
+                                    <p>Qualité : '.$hotel["qualiter"].'</p>
+                                    <p>Adresse : '.$hotel["adresse"].'</p>
+                                </div>
+                                <div class="infores">
+                                    <p>Type de chambre : ';
+                                    if ($chambre["is_dortoir"] == true){
+                                        echo 'Dortoir';
+                                    } else {
+                                        echo 'Chambre privative';
+                                    }
+                            echo '</p>
+                                    <p>Arrivée : '.$resv["date_arrivee"].'</p>
+                                    <p>Départ : '.$resv["date_depart"].'</p>
+                                    <p>Nombre de personne : '.$resv["nb_lit"].'</p>
+                                    <p>Prix : '.$resv["prix"].'€</p>
+                                 </div>';
+                            echo '</article>';
                         }
                     }
 
                     fin:
                 ?>
-                <article class="res">
-                    <img src="../src/img/"
-                </article>
             </div>
         </main>
         <footer>

@@ -16,21 +16,8 @@ main {
     align-items: center;
 }
 
-.log {
-    background-color: var(--cl-vert-clair);
-    position: relative;
-    width: auto;
-    height: 50%;
-    display: inline-flex;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
-    border-radius: 8px;
-    left: 70%;
-    padding: 0px 5px;
-    margin: 1%;
-    text-decoration: none;
-    font-size: 150%;
-    color: var(--cl-bleu-foncer);
+#loga {
+    left: 35em !important;;
 }
 
 /* --- Main --- */
@@ -48,7 +35,7 @@ main {
     align-items: center;
     flex-direction: column;
     width: 80%;
-    height: 250px;
+    height: 300px;
     margin: 0;
     background-color: var(--cl-bleu-clair);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
@@ -60,20 +47,21 @@ main {
     padding: 10px;
     text-align: center;
     align-items: center;
+    background-color: var(--cl-bleu-clair);
 }
 
 #info p {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
     padding: 5px;
     margin: 15px;
+    background-color: var(--cl-bleu-foncer-1);
 }
 
 #changemdp{
     display: inline-flex;
-    gap: 5%;
-    text-align: left;
+    gap: 10%;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: 40px;
     margin-left: auto;
     margin-right: auto;
@@ -82,49 +70,79 @@ main {
 #changemdp input{
     text-align: left;
     border-radius: 5px;
-    width: 15%;
-    height: 40px;
+    width: 25%;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 15px;
 }
 
-.eyes {
+#changemdp button {
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+    margin-top: 5px;
+}
+
+#eyes {
     width: 30px;
     height: 30px;
     position: absolute;
+    margin: 2px;
+    top: 72%
 }
-
-#existeyes {
-    top: 76%;
-    left: 30%;
-}
-
-#neweyes {
-    top: 76%;
-    left: 56%;
-}
-
-#neweyes2 {
-    top: 76%;
-    left: 84%;
-}
-
 
 #mainpart{
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 610px;
     margin: 0;
 }
+
 
 #nores {
     position: relative;
     top: 10%;
     margin: 0;
-    background-color: var(--cl-bleu-clair);
+    background-color: var(--cl-vert-clair);
     margin-left: auto;
     margin-right: auto;
 }
+
+#rest {
+    font-size: 120%;
+    background-color: var(--cl-vert-clair);
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.res {
+    width: 90%;
+    height: 250px;
+    display: inline-flex;
+    gap: 5%;
+    padding: 10px;
+    background-color: var(--cl-bleu-clair-clair);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+    margin-top : 20px;
+}
+
+.imgres {
+    width: 300px;
+    height: 250px;
+}
+
+.infores {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flexbox;
+    flex-direction: column;
+}
+
 
 .login {
     display: block;
