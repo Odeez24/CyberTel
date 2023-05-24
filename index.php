@@ -32,8 +32,8 @@
                     <p>
                         Trouver votre chambre d'hôtel parfait à Night City.
                     </p>
-                    <form id="searchbar" action="./search" method="post">
-                        <input type="text" id="name" placeholder="Destination">
+                    <form id="searchbar" action="./find" method="post">
+                        <input type="text" id="name" placeholder="Nom de l'hôtel">
                         <select id="classification">
                             <option>Qualité de l'hôtel</option>
                             <option value="3">Luxe</option>
@@ -41,9 +41,9 @@
                             <option value="1">Bas</option>
                         </select>
                         <label for="arriver">Date d'arrivée</label>
-                        <input type="date" id="arrivee">
+                        <input type="date" min="2022-01-01" max="2040-01-01" id="arrivee">
                         <label for="depart">Date de départ</label>
-                        <input type="date" id="depart">
+                        <input type="date" min="2022-01-01" max="2040-01-01"  id="depart">
                         <input type="number" id="nblit" min="0" placeholder="Lits">
                         <button type="submit" id="searchbut">Rechercher</button>
                     </form>

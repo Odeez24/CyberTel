@@ -85,6 +85,7 @@
                         $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
                     } catch (PDOException $e){
                         session_destroy();
+                        $_SESSION = [];
                         $err = "Error during server connection";
                         goto fin;
                     }
@@ -93,6 +94,7 @@
                     $bool =  $res->execute();
                     if (!$bool){
                         session_destroy();
+                        $_SESSION = [];
                         unset($res);
                         unset($connexion);
                         $err = "Error during server communication";
@@ -107,7 +109,7 @@
                             <p>Vous n\'avez pas de réservation !</p>
                             <hr>
                             <p>Si vous voulez resérver une chambre veillez vous rentre sur cette page</p>
-                            <a href="../search" class="login">Reserver votre chambre !</a>
+                            <a href="../find" class="login">Reserver votre chambre !</a>
                         </div>';
                         goto fin;
                     } else {
@@ -124,6 +126,7 @@
                             $boolho =  $reshotel->execute();
                             if (!$boolch || !$boolho){
                                 session_destroy();
+                                $_SESSION = [];
                                 unset($resch);
                                 unset($reshotel);
                                 unset($connexion);
@@ -153,6 +156,7 @@
                                  </div>';
                             echo '</article>';
                         }
+                        echo '</div>';
                     }
 
                     fin:
