@@ -26,8 +26,8 @@
                 $err = 0;
                 $firstlaunch = 0;
                 $noinfo = false;
-                if (isset($_POST["nom"], $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"])){
-                    if (!isset($_POST["nom"], $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"])){
+                if (isset($_POST["nom"], $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"])){
+                    if (!isset($_POST["nom"], $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"])){
                         $err = "Bad Format";
                         goto fin;
                     }
@@ -49,9 +49,9 @@
                         goto fin;
                     }
                     $id = $res->fetch();
-                    $reqa = "INSERT INTO chambre (id_hotel, is_dortoir, prix, nb_lits, img) VALUES (?, ?, ?, ?, ?)";
+                    $reqa = "INSERT INTO chambre (id_hotel, is_dortoir, prix, nb_lits, img, nb_chambre) VALUES (?, ?, ?, ?, ?, ?)";
                     $resa = $connexion->prepare($reqa);
-                    $bool=  $resa->execute([$id, $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"]]);
+                    $bool=  $resa->execute([$id, $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"]]);
                     if (!$bool){
                         unset($res);
                         unset($resa);
@@ -106,6 +106,15 @@
                     <?php 
                     if (isset($_POST["prix"])){
                         $a = $_POST["prix"];
+                        echo "value = \"{$a}\"";
+                    }else if (!$noinfo) {
+                        echo "class=\"err\"";
+                    }
+                    ?>required>
+                    <input type="number" id="num" name="num"placeholder="numéro chambre"
+                    <?php 
+                    if (isset($_POST["num"])){
+                        $a = $_POST["num"];
                         echo "value = \"{$a}\"";
                     }else if (!$noinfo) {
                         echo "class=\"err\"";

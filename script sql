@@ -7,9 +7,7 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `tel` varchar(100) NOT NULL,
   `adresse` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_user`),
-  UNIQUE KEY `user_UN` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `codepost` int(11) NOT NULL,
 
 Script table chambre :
 CREATE TABLE `chambre` (
@@ -18,6 +16,8 @@ CREATE TABLE `chambre` (
   `is_dortoir` tinyint(1) NOT NULL,
   `prix` int(10) unsigned NOT NULL,
   `nb_lits` int(10) unsigned NOT NULL,
+  `img` varchar(100) NOT NULL,
+  `nb_chambre` varchar(100) NOT NULL,
   PRIMARY KEY (`id_chambre`),
   KEY `chambre_FK` (`id_hotelch`),
   CONSTRAINT `chambre_FK` FOREIGN KEY (`id_hotelch`) REFERENCES `hotel` (`id_hotel`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -45,5 +45,6 @@ CREATE TABLE `hotel` (
   `adresse` varchar(100) NOT NULL,
   `qualite` int(11) NOT NULL,
   `etoile` int(11) NOT NULL,
-  PRIMARY KEY (`id_hotel`)
+  PRIMARY KEY (`id_hotel`),
+  UNIQUE KEY `hotel_UN` (`adresse`,`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

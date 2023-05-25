@@ -272,7 +272,7 @@
                     }
                     $hotel = $resc->fetch();
                     echo '<article class="res">';
-                    echo '<img src="../src/imgchambre/".$chambre[\"img\"].".jpg" alt="Image de la chambre" class="imgch">
+                    echo '<img src="../src/imgchambre/'.$ch["img"].'" alt="Image de la chambre" class="imgch">
                             <div class="infoch">
                                 <p>Hôtel : '.$hotel["nom"].'</p>
                                 <p>Qualité : '.$hotel["qualiter"].'</p>
@@ -288,26 +288,27 @@
                                 echo '</p>
                                 <p>Nombre de personne : '.$ch["nb_lits"].'</p>
                                 <p>Prix : '.$ch["prix"].'€</p>
+                                <p>Numéro de chambre : '.$ch["nb_chambre"].'</p>
                              </div>';
                             echo '<div class="divres hidden>
                                 <form class="formres" action="../reservation" method="post"
-                                <input type="number" id="idch" value=\'{$ch["id_chambre"]}\' required hidden>
-                                <input type="number" id="iduser" value=\'{.$_SESSION["iduser"]}\' required hidden>
+                                <input type="number" id="idch" value='.$ch["id_chambre"].' required hidden>
+                                <input type="number" id="iduser" value='.$_SESSION["iduser"].' required hidden>
                                 <label for="arriver">Date d\'arrivée</label>
                                 <input type="date" min="2022-01-01" max="2040-01-01" id="arrivee"';
                                 if (isset($query["arriver"])){
-                                    echo 'value=\'{$query["arriver"]}\'';
+                                    echo 'value='.$query["arriver"].'';
                                 }
                                 echo 'required>
                                 <label for="depart">Date de départ</label>
                                 <input type="date" min="2022-01-01" max="2040-01-01"  id="depart"';
                                 if (isset($query["depart"])){
-                                    echo 'value=\'{$query["depart"]}\'';
+                                    echo 'value='.$query["depart"].'';
                                 }
                                 echo 'required>
                                 <input type="number" id="nblit" min="0"';
                                 if (isset($query["nblit"])){
-                                    echo 'value=\'{$query["nblit"]}\'';
+                                    echo 'value='.$query["nblit"].'';
                                 }
                                 echo 'required>
                                 <button type="submit" id="searchbut">Réserver</button>';        
