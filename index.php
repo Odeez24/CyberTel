@@ -30,7 +30,7 @@
             <div id="mainpart">
                 <div id="searchbanner" class="box">
                     <p>
-                        Trouver votre chambre d'hôtel parfait à Night City.
+                        Trouver votre chambre d'hôtel parfaite à Night City.
                     </p>
                     <form id="searchbar" action="./find" method="post">
                         <input type="text" id="name" placeholder="Nom de l'hôtel">

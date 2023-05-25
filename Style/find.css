@@ -94,3 +94,33 @@
     color: var(--cl-jaune);
     border: var(--cl-border);
 }
+
+#findbox {
+    background-color: var(--cl-vert-clair);
+    display: flex;
+    flex-flow: column;
+}
+
+.res {
+    width: 45%;
+    height: 250px;
+    display: flex;
+    gap: 5%;
+    padding: 10px;
+    background-color: var(--cl-bleu-clair-clair);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+    margin-top : 20px;
+}
+
+.imgres {
+    width: 100px;
+    height: 80px;
+}
+
+.infores {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flexbox;
+    flex-direction: column;
+}

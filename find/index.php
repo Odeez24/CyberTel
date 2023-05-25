@@ -38,11 +38,10 @@
                         </div>';
                 goto fin;
             }
-            $err = 0;
             echo '
                 <div id="searchbanner" class="box">
                     <p>
-                        Trouver votre chambre d\'hôtel parfait à Night City.
+                        Trouver votre chambre d\'hôtel parfaite à Night City.
                     </p>
                     <form id="searchbar" action="./" method="post">
                         <input type="text" id="name" placeholder="Nom de l\'hôtel">
@@ -66,7 +65,7 @@
                 try {
                     $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
                 } catch (PDOException $e){
-                     echo '<p class="errmsg">
+                    echo '<p class="errmsg">
                     Error during server communication </p>';                       
                 goto fin;
                 }
@@ -156,10 +155,166 @@
                             <p>Aucun résultat à votre recherche ! </p>
                             <hr>
                             <p>Veuillez effectuer une nouvelle recherche</p>
-                        </div>';
+                    </div>';
+                    goto fin;
                 }
-                
-                
+                $reqch1 = 'SELECT * FROM chambre WHERE id_hotelch IN $allho["id_hotel"]';
+                if (isset($query["nblit"])){
+                    $reqch1 .= " AND ";
+                    $reqch1 .= "nb_lits >= {$query["nblit"]}";
+                }
+                $resch1 = $connexion->prepare($reqch1);
+                $bool =  $resch1->execute();                    
+                if (!$bool){
+                    unset($res);
+                    unset($resch1);
+                    unset($connexion);
+                    echo '<p class="errmsg">
+                    Error during server communication </p>';
+                    goto fin;                    
+                }
+                $allch1 = $resch1->fetchAll();
+                if (count($allch1) == 0) {
+                    unset($res);
+                    unset($resch1);
+                    unset($connexion);
+                    echo '
+                    <div id="nores" class="box">
+                            <p>Aucun résultat à votre recherche ! </p>
+                            <hr>
+                            <p>Veuillez effectuer une nouvelle recherche</p>
+                    </div>';
+                    goto fin;
+                }
+                $reqre = 'SELECT * FROM reservation WHERE id_chambre IN $allch1["id_chambre"]';
+                $resre = $connexion->prepare($reqre);
+                $bool = $resre->execute();
+                if (!$bool){
+                    unset($res);
+                    unset($resch1);
+                    unset($resre);
+                    unset($connexion);
+                    echo '<p class="errmsg">
+                    Error during server communication </p>';
+                    goto fin;                    
+                }
+                $valid = array();
+                $allre = $resre->fetchAll();
+                foreach ($allch1 as $ch) {
+                    if (!isset($query["arriver"], $query["depart"])){
+                        $valid[$ch["id_chambre"]] = $ch["id_chambre"];
+                    } else if (in_array($ch["id_chambre"], $allre)){
+                        if ($ch["is_dortoir"]){
+                            $nblit = 0;
+                            foreach ($allre as $re){
+                                if ($ch["id_chambre"] == $re["id_chambre"]){
+                                    if (isset($query["arriver"], $query["depart"])){
+                                        if (($query["arriver"] > $re["date_deb"] && $query["depart"] < $re["date_fin"]) 
+                                            || ($query["arriver"] < $re["date_deb"] && $query["depart"] < $re["date_fin"] && $query["depart"] > $re["date_deb"])
+                                            ||($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"] && $query["depart"] > $re["date_fin"])){
+                                            $nblit += $re["nb_lit"];
+                                        }
+                                    } else if (isset($query["arriver"])) {
+                                        if ($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"]){
+                                            $nblit += $re["nb_lit"];
+                                        }
+                                    } else if (isset($query["depart"])){
+                                        if ($query["depart"] > $re["date_deb"] && $query["depart"] < $re["date_fin"]){
+                                            $nblit += $re["nb_lit"];
+                                        }
+                                    }
+                                }
+                            }
+                            if ($nblit + $query["nblit"] <= $ch["nb_lits"]) {
+                                $valid[$ch["id_chambre"]] = $ch["id_chambre"];
+                            }                            
+                        } else {
+                            $trigger = 0;
+                            foreach ($allre as $re){
+                                if ($ch["id_chambre"] == $re["id_chambre"]){
+                                    if (isset($query["arriver"], $query["depart"])){
+                                        if (($query["arriver"] > $re["date_deb"] && $query["depart"] < $re["date_fin"]) 
+                                            || ($query["arriver"] < $re["date_deb"] && $query["depart"] < $re["date_fin"] && $query["depart"] > $re["date_deb"])
+                                            ||($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"] && $query["depart"] > $re["date_fin"])){
+                                            $trigger = 1;
+                                        }
+                                    } else if (isset($query["arriver"])) {
+                                        if ($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"]){
+                                            $trigger = 1;
+                                        }
+                                    } else if (isset($query["depart"])){
+                                        if ($query["depart"] > $re["date_deb"] && $query["depart"] < $re["date_fin"]){
+                                            $trigger = 1;;
+                                        }
+                                    }
+                                }
+                            }
+                            if ($triger == 0) {
+                                $valid[$ch["id_chambre"]] = $ch["id_chambre"];
+                            }
+                        }
+                    }
+                }
+                echo '<div id="findbox" class="box">';
+                foreach ($valid as $ch){
+                    $reqc = "SELECT * FROM hotel WHERE id_hotel = '{$ch["id_hotel"]}'";
+                    $resc = $connexion->prepare($reqc);
+                    $bool = $resc->execute();
+                    if (!$bool){
+                        unset ($resc);
+                        unset($res);
+                        unset($resch1);
+                        unset($resre);
+                        unset($connexion);
+                        echo '<p class="errmsg">
+                        Error during server communication </p>';
+                        goto fin;                    
+                    }
+                    $hotel = $resc->fetch();
+                    echo '<article class="res">';
+                    echo '<img src="../src/imgchambre/".$chambre[\"img\"].".jpg" alt="Image de la chambre" class="imgch">
+                            <div class="infoch">
+                                <p>Hôtel : '.$hotel["nom"].'</p>
+                                <p>Qualité : '.$hotel["qualiter"].'</p>
+                                <p>Adresse : '.$hotel["adresse"].'</p>
+                            </div>
+                            <div class="infoch">
+                                <p>Type de chambre : ';
+                                if ($ch["is_dortoir"] == true){
+                                    echo 'Dortoir';
+                                } else {
+                                    echo 'Chambre privative';
+                                }
+                                echo '</p>
+                                <p>Nombre de personne : '.$ch["nb_lits"].'</p>
+                                <p>Prix : '.$ch["prix"].'€</p>
+                             </div>';
+                            echo '<div class="divres hidden>
+                                <form class="formres" action="../reservation" method="post"
+                                <input type="number" id="idch" value=\'{$ch["id_chambre"]}\' required hidden>
+                                <input type="number" id="iduser" value=\'{.$_SESSION["iduser"]}\' required hidden>
+                                <label for="arriver">Date d\'arrivée</label>
+                                <input type="date" min="2022-01-01" max="2040-01-01" id="arrivee"';
+                                if (isset($query["arriver"])){
+                                    echo 'value=\'{$query["arriver"]}\'';
+                                }
+                                echo 'required>
+                                <label for="depart">Date de départ</label>
+                                <input type="date" min="2022-01-01" max="2040-01-01"  id="depart"';
+                                if (isset($query["depart"])){
+                                    echo 'value=\'{$query["depart"]}\'';
+                                }
+                                echo 'required>
+                                <input type="number" id="nblit" min="0"';
+                                if (isset($query["nblit"])){
+                                    echo 'value=\'{$query["nblit"]}\'';
+                                }
+                                echo 'required>
+                                <button type="submit" id="searchbut">Réserver</button>';        
+                    echo '</article>';
+                    echo '</div>';
+                }
+                echo'</div>';
             fin:
             echo '</div>';
             ?>

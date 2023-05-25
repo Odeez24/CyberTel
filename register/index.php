@@ -28,14 +28,14 @@
                 $err = 0;
                 $firstlaunch = 0;
                 $noinfo = false;
-                if (isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"])){
+                if (isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"], $_POST["codepost"])){
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["nom"]) != 1){ unset($_POST["nom"]);}
                     if (preg_match("/^[A-Za-z^\s][A-Za-z\s]{1,14}[A-Za-z^\s]/", $_POST["prenom"]) != 1){ unset($_POST["prenom"]);}   if (preg_match("/^.{0,128}$/", $_POST["email"]) != 1){ unset($_POST["email"]);}
                     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){ unset($_POST["email"]);}
                     if (preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/", $_POST["mdp"]) != 1){ unset($_POST["msp"]);}
                     if (preg_match("/^((\+|00)33\s?|0)[67](\s?\d{2}){4}$/", $_POST["tel"]) != 1){unset($_POST["tel"]);}
                     if (preg_match("/^^.{0,128}$/", $_POST["adresse"]) != 1){unset($_POST["adresse"]);}
-                    if (!isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"])){
+                    if (!isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"], $_POST["codepost"])){
                         $err = "Bad Format";
                         goto fin;
                     }
@@ -46,10 +46,10 @@
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "INSERT INTO user (nom, prenom, email, password, tel, adresse) VALUES (?, ?, ?, ?, ?, ?)";
+                    $req = "INSERT INTO user (nom, prenom, email, password, tel, adresse, codepost) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     $res = $connexion->prepare($req);
                     $_POST["mdp"] = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
-                    $bool=  $res->execute([$_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"]]);
+                    $bool=  $res->execute([$_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"], $_POST["codepost"]]);
                     if (!$bool){
                         unset($res);
                         unset($connexion);
@@ -58,7 +58,6 @@
                         unset($_POST["mdp"]);
                         goto fin;
                     }
-                    echo "test4";
                     $firstlaunch = 1;
                     fin:
                 } else {
@@ -130,10 +129,19 @@
                     }
                     ?>required>
                     <img src="../src/closeeyes.jpg" id="regeyes" class="eyes" onclick="viewmdpreg()">
-                    <input type="text" id="adresse" name="adresse" placeholder="Adresse" pattern="^.{0,128}$"
+                    <input type="text" id="adresse" name="adresse" placeholder="x rue xxx Ville" pattern="^.{0,128}$"
                     <?php 
                     if (isset($_POST["adresse"])){
                         $a = $_POST["adresse"];
+                        echo "value = \"{$a}\"";
+                    }else if (!$noinfo) {
+                        echo "class=\"err\"";
+                    }
+                    ?>required>
+                    <input type="number" id="codepost" name="codepost" placeholder="xxxxx" min="00000"
+                    <?php 
+                    if (isset($_POST["codepost"])){
+                        $a = $_POST["codepost"];
                         echo "value = \"{$a}\"";
                     }else if (!$noinfo) {
                         echo "class=\"err\"";

@@ -58,6 +58,7 @@
                         <p>Email : <?php echo $_SESSION["email"]?></p>
                         <p>Téléphone : <?php echo $_SESSION["tel"]?></p>
                         <p>Adresse : <?php echo $_SESSION["adresse"]?></p>
+                        <p>Code postal : <?php echo $_SESSION["codepost"]?></p>
                     </div>
                     <p>Changer de mot de passe</p>
                     <p>Minimum 8 caractères, au moins une majuscule, une minuscule et une lettre</p>

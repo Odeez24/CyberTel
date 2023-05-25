@@ -9,7 +9,7 @@ main {
     padding: 2%;
 }
 
-.boxlog{
+.boxadd{
     vertical-align: top;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
@@ -27,15 +27,24 @@ main {
     padding: 10px;
 }
 
-.boxlog span{
+.boxadd select{
+    text-align: left;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid var(--cl-border);
+    box-shadow: 1px 1px 1px #999;
+    margin-bottom: 10px;
+} 
+
+.boxadd span{
     font-size: 150%;
 }
 
-.boxlog form{
+.boxadd form{
     align-items: center;
 }
 
-.boxlog input {
+.boxadd input {
     display: block;
     text-align: left;
     border-radius: 5px;
@@ -48,46 +57,13 @@ main {
     margin-right: auto;
 }
 
-.boxlog button {
+.boxadd button {
     width: 50%;
     height: 20px;
     border-radius: 5px;
     background-color: var(--cl-bleu-ultra-foncer);
     color: var(--cl-jaune);
     border: var(--cl-border);
-}
-
-.login {
-    display: block;
-    text-decoration: none;
-    width: 50%;
-    height: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    background-color: var(--cl-bleu-ultra-foncer);
-    color: var(--cl-jaune);
-    border: var(--cl-border);
-}
-
-#codepost {
-    appearance: textfield;
-}
-.eyes {
-    width: 35px;
-    height: 35px;
-}
-
-#regeyes {
-    position: absolute;
-    top: 48%;
-    left: 80%;
-}
-
-#logeyes {
-    position: absolute;
-    top: 44%;
-    left: 80%;
 }
 
 .validate {

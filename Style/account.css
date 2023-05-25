@@ -43,7 +43,7 @@ main {
 
 #info {
     display: inline-flex;
-    gap: 5%;
+    gap: 4%;
     padding: 10px;
     text-align: center;
     align-items: center;
@@ -53,7 +53,7 @@ main {
 #info p {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
     padding: 5px;
-    margin: 15px;
+    margin: 10px;
     background-color: var(--cl-bleu-foncer-1);
 }
 
@@ -91,7 +91,7 @@ main {
     height: 30px;
     position: absolute;
     margin: 2px;
-    top: 72%
+    top: 66%
 }
 
 #mainpart{

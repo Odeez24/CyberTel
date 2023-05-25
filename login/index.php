@@ -48,7 +48,7 @@
                         goto fin;
                     }
                     $account = $res->fetch();
-                    if (count($account) == 0){
+                    if ($account == null){
                         session_destroy();
                         unset($res);
                         unset($connexion);
@@ -62,12 +62,14 @@
                         $err = "Mauvais mot de passe";
                         goto fin;
                     }
+                    $_SESSION ["iduser"] = $account["id_user"];
                     $_SESSION ["nom"] = $account["nom"];
                     $_SESSION ["prenom"] = $account["prenom"];
                     $_SESSION ["email"] = $account["email"];
                     $_SESSION ["tel"] = $account["tel"];
                     $_SESSION ["mdp"] = $account["password"];
                     $_SESSION ["adresse"] = $account["adresse"];
+                    $_SESSION ["codepost"] = $account["codepost"];
                     unset($res);
                     unset($connexion);
                     $firstlaunch = 1;
@@ -86,6 +88,9 @@
                 <hr>
                 <p>Votre compte</p>
                 <a class="login" href="../account">Votre compte</a>
+                <hr>
+                <p>Pour résérvé votre chambre</p>
+                <a class="login"href="../find">Réserver</a>
             </div>
             <div class="boxlog" <?php
                     if ($firstlaunch != 0) {
