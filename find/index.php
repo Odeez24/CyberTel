@@ -28,9 +28,18 @@
         </header>
         <main>
             <?php
+            echo '<div id="mainpart">';
+            if (!isset($_SESSION["nom"])){
+                echo '<div id="nores" class="box">
+                            <p>Vous n\'êtes pas connecté !</p>
+                            <hr>
+                            <p>Veuillez vous connecter</p>
+                            <a href="../login" class="login">Se connecter </a>
+                        </div>';
+                goto fin;
+            }
             $err = 0;
             echo '
-            <div id="mainpart">
                 <div id="searchbanner" class="box">
                     <p>
                         Trouver votre chambre d\'hôtel parfait à Night City.
@@ -40,8 +49,8 @@
                         <select id="classification">
                             <option>Qualité de l\'hôtel</option>
                             <option value="3">Luxe</option>
-                            <option value="2">Moyen</option>
-                            <option value="1">Bas</option>
+                            <option value="2">Moyen de gamme</option>
+                            <option value="1">Bas de gamme</option>
                         </select>
                         <label for="arriver">Date d\'arrivée</label>
                         <input type="date" min="2022-01-01" max="2040-01-01"  id="arrivee">
@@ -52,8 +61,7 @@
                     </form>
                     <form>
                     </form>
-                </div>
-            </div>';
+                </div>';
             include "../src/mysql.php";
                 try {
                     $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
@@ -151,7 +159,9 @@
                         </div>';
                 }
                 
+                
             fin:
+            echo '</div>';
             ?>
             </main>
         <footer>
