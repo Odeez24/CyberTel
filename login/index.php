@@ -37,8 +37,9 @@
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "SELECT * FROM user WHERE email = '{$_POST["email"]}';";
+                    $req = "SELECT * FROM user WHERE email = :email;";
                     $res = $connexion->prepare($req);
+                    $res->bindParam(':email', $_POST["email"]);
                     $bool =  $res->execute();
                     if (!$bool){
                         session_destroy();

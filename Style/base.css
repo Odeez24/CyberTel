@@ -97,6 +97,18 @@ footer{
     text-align: center;
 }
 
+.login {
+    display: block;
+    text-decoration: none;
+    width: 80%;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+}
 /* --- Header --- */
 #lienlogo {
     position: relative;
@@ -136,7 +148,7 @@ footer{
     height: 50%;
     display: inline-flex;
     align-items: center;
-    left: 52em;
+    left: 62%;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
     border-radius: 8px;
     padding: 0px 5px;

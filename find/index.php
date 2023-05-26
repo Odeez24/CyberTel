@@ -211,7 +211,8 @@
                                     if (isset($query["arriver"], $query["depart"])){
                                         if (($query["arriver"] > $re["date_deb"] && $query["depart"] < $re["date_fin"]) 
                                             || ($query["arriver"] < $re["date_deb"] && $query["depart"] < $re["date_fin"] && $query["depart"] > $re["date_deb"])
-                                            ||($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"] && $query["depart"] > $re["date_fin"])){
+                                            || ($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"] && $query["depart"] > $re["date_fin"])
+                                            || ($query["arriver"] < $re["date_deb"] && $query["depart"] > $re["date_fin"])){
                                             $nblit += $re["nb_lit"];
                                         }
                                     } else if (isset($query["arriver"])) {
@@ -316,6 +317,11 @@
                     echo '</div>';
                 }
                 echo'</div>';
+            unset ($resc);
+            unset($res);
+            unset($resch1);
+            unset($resre);
+            unset($connexion);
             fin:
             echo '</div>';
             ?>

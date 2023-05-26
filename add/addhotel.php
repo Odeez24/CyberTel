@@ -1,4 +1,5 @@
 <?php
+    session_start();
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -27,10 +28,6 @@
                 $firstlaunch = 0;
                 $noinfo = false;
                 if (isset($_POST["nom"], $_POST["adresse"], $_POST["qualiter"], $_POST["note"])){
-                    if (!isset($_POST["nom"], $_POST["adresse"], $_POST["qualiter"], $_POST["note"])){
-                        $err = "Bad Format";
-                        goto fin;
-                    }
                     include "../src/mysql.php";
                     try {
                         $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
@@ -73,7 +70,7 @@
                     }
                 ?>>
                 <span>Ajouter un hotel</span>
-                <form action="./" method="post" name="addho">
+                <form action="./addhotel.php" method="post" name="addho">
                     <?php 
                         if ($err != 0){
                             echo "<p class=\"err errmsg\">".$err."</p>";
@@ -88,14 +85,29 @@
                         echo "class=\"err\"";
                     }
                     ?>required>
-                    <input type="text" id="adresse" placeholder="adresse de l'hôtel" required>
-                    <select id="class">
+                    <input type="text" id="adresse" placeholder="adresse de l'hôtel"
+                    <?php 
+                    if (isset($_POST["adresse"])){
+                        $a = $_POST["adresse"];
+                        echo "value = \"{$a}\"";
+                    }else if (!$noinfo) {
+                        echo "class=\"err\"";
+                    }
+                    ?> required>
+                    <select id="class" <?php 
+                    if (isset($_POST["class"])){
+                        $a = $_POST["class"];
+                        echo "value = \"{$a}\"";
+                    }else if (!$noinfo) {
+                        echo "class=\"err\"";
+                    }
+                    ?>>
                             <option>Qualité de l'hôtel</option>
                             <option value="3">Luxe</option>
                             <option value="2">Moyen</option>
                             <option value="1">Bas</option>
                     </select>
-                    <input type="number" id="note" placeholder="note"
+                    <input type="number" id="note" placeholder="note" min="0" max="5"
                     <?php 
                     if (isset($_POST["note"])){
                         $a = $_POST["note"];
