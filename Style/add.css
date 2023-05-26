@@ -73,4 +73,5 @@ main {
     padding: 5px;
     background-color: var(--cl-bleu-clair);
     text-align: center;
+    width: 50%;
 }

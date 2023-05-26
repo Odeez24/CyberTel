@@ -26,10 +26,12 @@
                 $err = 0;
                 $firstlaunch = 0;
                 $noinfo = false;
-                if (isset($_POST["nom"], $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"])){
-                    if (!isset($_POST["nom"], $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"])){
-                        $err = "Bad Format";
-                        goto fin;
+                if (isset($_POST["nom"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"])){
+                    $isdortoir;
+                    if (!isset($_POST["isdortoir"])){
+                        $isdortoir = 0;
+                    } else {
+                        $$isdortoir = 1;
                     }
                     include "../src/mysql.php";
                     try {
@@ -38,8 +40,9 @@
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "SELECT id_hotel FROM hotel WHERE nom = ".$_POST["nom"].";";
+                    $req = "SELECT id_hotel FROM hotel WHERE nom = :idhot;";
                     $res = $connexion->prepare($req);
+                    $res->bindParam(':idhot', $_POST["nom"]);
                     $bool = $res->execute();
                     if (!$bool){
                         unset($res);
@@ -49,9 +52,11 @@
                         goto fin;
                     }
                     $id = $res->fetch();
-                    $reqa = "INSERT INTO chambre (id_hotel, is_dortoir, prix, nb_lits, img, nb_chambre) VALUES (?, ?, ?, ?, ?, ?)";
+                    $id = $id[0];
+                    echo $id;
+                    $reqa = "INSERT INTO chambre (id_hotelch, is_dortoir, prix, nb_lits, img, nb_chambre) VALUES (?, ?, ?, ?, ?, ?)";
                     $resa = $connexion->prepare($reqa);
-                    $bool=  $resa->execute([$id, $_POST["isdortoir"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"]]);
+                    $bool=  $resa->execute([$id, $isdortoir, $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"]]);
                     if (!$bool){
                         unset($res);
                         unset($resa);
@@ -61,6 +66,10 @@
                         goto fin;
                     }
                     $firstlaunch = 1;
+                    unset($res);
+                    unset($resa);
+                    unset($connexion);
+
                     fin:
                 } else {
                     $noinfo = true;
@@ -101,7 +110,7 @@
                     }
                     ?>required>
                     <label for="isdortoir">Est un dortoir</label>
-                    <input type="checkbox" id="isdortoir" name="isdortoir" required>
+                    <input type="checkbox" id="isdortoir" name="isdortoir">
                     <input type="number" id="prix" name="prix"placeholder="prix"
                     <?php 
                     if (isset($_POST["prix"])){

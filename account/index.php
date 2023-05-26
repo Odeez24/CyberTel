@@ -90,8 +90,9 @@
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "SELECT * FROM reservation WHERE id_user = (SELECT id_user FROM user WHERE email = '{$_SESSION["email"]}')";
+                    $req = "SELECT * FROM reservation WHERE id_user = (SELECT id_user FROM user WHERE email = :email);";
                     $res = $connexion->prepare($req);
+                    $res->bindParam(':email', $_SESSION["email"]);
                     $bool =  $res->execute();
                     if (!$bool){
                         session_destroy();

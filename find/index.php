@@ -1,5 +1,8 @@
 <?php
     session_start();
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE <!DOCTYPE html5>
@@ -122,7 +125,7 @@
                     $query["nblit"] = $_POST["nblit"];
                 }
                 $request = "SELECT * FROM hotel";
-                if (count($query) > 0){
+                if (isset($_POST["name"]) || isset($_POST["classification"])){
                     $request .= " WHERE ";
                     $first = true;
                     foreach($query as $key => $value){
@@ -130,14 +133,20 @@
                             $request .= " AND ";
                         }
                         if ($key == "nom"){
-                            $request .= "name LIKE {$_POST["name"]}";
+                            $request .= "nom LIKE :name";
                         } else if ($key == "class" ){
-                            $request .= "qualite = {$value}";
+                            $request .= "qualite = :class";
                         }
                         $first = false;
                     }
                 }
                 $res = $connexion->prepare($request);
+                if (isset($query["name"])){
+                    $res->bindParam(':name', $query["name"]);
+                }
+                if (isset($query["class"])){
+                    $res->bindParam(':class', $query["class"]);
+                }
                 $bool =  $res->execute();                    
                 if (!$bool){
                     unset($res);
@@ -158,13 +167,17 @@
                     </div>';
                     goto fin;
                 }
-                $reqch1 = 'SELECT * FROM chambre WHERE id_hotelch IN $allho["id_hotel"]';
+                $reqch1 = 'SELECT * FROM chambre WHERE id_hotelch IN :allho';
                 if (isset($query["nblit"])){
                     $reqch1 .= " AND ";
-                    $reqch1 .= "nb_lits >= {$query["nblit"]}";
+                    $reqch1 .= "nb_lits >= :nblit";
                 }
                 $resch1 = $connexion->prepare($reqch1);
-                $bool =  $resch1->execute();                    
+                $resch1->bindParam(':allho', $allho["id_hotel"]);
+                if (isset($query["nblit"])){
+                    $resch1->bindParam(':nblit', $query["nblit"]);
+                }
+                $bool = $resch1->execute();                    
                 if (!$bool){
                     unset($res);
                     unset($resch1);
@@ -186,8 +199,9 @@
                     </div>';
                     goto fin;
                 }
-                $reqre = 'SELECT * FROM reservation WHERE id_chambre IN $allch1["id_chambre"]';
+                $reqre = 'SELECT * FROM reservation WHERE id_chambre IN :allch1';
                 $resre = $connexion->prepare($reqre);
+                $resre->bindParam(':allch1', $allch1["id_chambre"]);
                 $bool = $resre->execute();
                 if (!$bool){
                     unset($res);
@@ -258,8 +272,9 @@
                 }
                 echo '<div id="findbox" class="box">';
                 foreach ($valid as $ch){
-                    $reqc = "SELECT * FROM hotel WHERE id_hotel = '{$ch["id_hotel"]}'";
+                    $reqc = "SELECT * FROM hotel WHERE id_hotel = :id_hotel";
                     $resc = $connexion->prepare($reqc);
+                    $resc->bindParam(":id_hotel", $ch["id_hotel"]);
                     $bool = $resc->execute();
                     if (!$bool){
                         unset ($resc);

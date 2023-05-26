@@ -1,5 +1,4 @@
 <?php
-    session_start();
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -27,7 +26,7 @@
                 $err = 0;
                 $firstlaunch = 0;
                 $noinfo = false;
-                if (isset($_POST["nom"], $_POST["adresse"], $_POST["qualiter"], $_POST["note"])){
+                if (isset($_POST["nom"], $_POST["adresse"], $_POST["class"], $_POST["note"])){
                     include "../src/mysql.php";
                     try {
                         $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
@@ -37,7 +36,7 @@
                     }
                     $req = "INSERT INTO hotel (nom, adresse, qualite, etoile) VALUES (?, ?, ?, ?)";
                     $res = $connexion->prepare($req);
-                    $bool=  $res->execute([$_POST["nom"], $_POST["adresse"], $_POST["qualiter"], $_POST["note"]]);
+                    $bool=  $res->execute([$_POST["nom"], $_POST["adresse"], $_POST["class"], $_POST["note"]]);
                     if (!$bool){
                         unset($res);
                         unset($connexion);
@@ -70,7 +69,7 @@
                     }
                 ?>>
                 <span>Ajouter un hotel</span>
-                <form action="./addhotel.php" method="post" name="addho">
+                <form action="./" method="post" name="addho">
                     <?php 
                         if ($err != 0){
                             echo "<p class=\"err errmsg\">".$err."</p>";
@@ -85,7 +84,7 @@
                         echo "class=\"err\"";
                     }
                     ?>required>
-                    <input type="text" id="adresse" placeholder="adresse de l'hôtel"
+                    <input type="text" id="adresse" name="adresse" placeholder="adresse de l'hôtel"
                     <?php 
                     if (isset($_POST["adresse"])){
                         $a = $_POST["adresse"];
@@ -94,7 +93,7 @@
                         echo "class=\"err\"";
                     }
                     ?> required>
-                    <select id="class" <?php 
+                    <select id="class" name="class"<?php 
                     if (isset($_POST["class"])){
                         $a = $_POST["class"];
                         echo "value = \"{$a}\"";
@@ -107,7 +106,7 @@
                             <option value="2">Moyen</option>
                             <option value="1">Bas</option>
                     </select>
-                    <input type="number" id="note" placeholder="note" min="0" max="5"
+                    <input type="" id="note" placeholder="note" min="0" max="5" name="note"
                     <?php 
                     if (isset($_POST["note"])){
                         $a = $_POST["note"];

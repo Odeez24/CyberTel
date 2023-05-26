@@ -46,10 +46,17 @@
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "INSERT INTO user (nom, prenom, email, password, tel, adresse, codepost) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    $req = "INSERT INTO user (nom, prenom, email, password, tel, adresse, codepost) VALUES :nom, :prenom, :email, :mdp, :tel, :adresse, :codepost";
                     $res = $connexion->prepare($req);
+                    $res->bindParam(":nom", $_POST["nom"]);
+                    $res->bindParam(":prenom", $_POST["prenom"]);
+                    $res->bindParam(":email", $_POST["email"]);
                     $_POST["mdp"] = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
-                    $bool=  $res->execute([$_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["mdp"], $_POST["tel"], $_POST["adresse"], $_POST["codepost"]]);
+                    $res->bindParam(":mdp", $_POST["mdp"]);
+                    $res->bindParam(":tel", $_POST["tel"]);
+                    $res->bindParam(":adresse", $_POST["adresse"]);
+                    $res->bindParam(":codepost", $_POST["codepost"]);
+                    $bool=  $res->execute();
                     if (!$bool){
                         unset($res);
                         unset($connexion);
