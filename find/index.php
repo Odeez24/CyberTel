@@ -4,7 +4,7 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     function affetoile($nb) {
-        echo "<div class='starcluster'>";
+        echo "<div class='star'>";
         if ($nb > 5) {
             $nb = 5;
         }
