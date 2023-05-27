@@ -3,6 +3,19 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+    function affetoile($nb) {
+        echo "<div class='starcluster'>";
+        if ($nb > 5) {
+            $nb = 5;
+        }
+        for ($k = 0; $k < $nb; $k += 1) {
+            echo "<img src='../src/etoileplein.png' class='note' alt='full'/>";
+        }
+        for ($k = 5; $k > $nb; $k -= 1) {
+            echo "<img src='../src/etoilevide.png' class='note' alt='empty'/>";
+        }
+        echo "</div>";
+    }
 ?>
 
 <!DOCTYPE html5>
@@ -373,8 +386,8 @@
                                 }
                                 echo '</p>
                                 <p>Nombre de personne : '.$ch["nb_lits"].'</p>
-                                <p>Prix : '.$ch["prix"].'€</p>
-                                <p>Numéro de chambre : '.$ch["nb_chambre"].'</p>'; ?>
+                                <p>Prix : '.$ch["prix"].'€</p>';
+                                affetoile($hotel["etoile"]);?>
                             </div>
                             </div>
                             <div class="divres">

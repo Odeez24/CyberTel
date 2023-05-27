@@ -186,3 +186,8 @@
     width: 9% !important;
     appearance: textfield;
 }
+
+.note {
+    width: 23px;
+    height: 23px;
+}

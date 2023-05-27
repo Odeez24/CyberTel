@@ -162,3 +162,8 @@ main {
     color: var(--cl-jaune);
     border: var(--cl-border);
 }
+
+.note {
+    width: 23px;
+    height: 23px;
+}
