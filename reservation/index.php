@@ -84,6 +84,7 @@
                 goto fin;                    
             }
             $allre = $resre->fetchAll();
+            $nblit = 0;
             foreach ($allre as $re){
                 if ($ch["is_dortoir"] != 0){
                     if (($_POST["arriver"] >= $re["date_deb"] && $_POST["depart"] <= $re["date_fin"]) 
@@ -92,7 +93,7 @@
                         || ($_POST["arriver"] <= $re["date_deb"] && $_POST["depart"] >= $re["date_fin"])){
                          $nblit += $re["nb_lit"];
                     }
-                    if ($nblit + $query["nblit"] <= $ch["nb_lits"]) {
+                    if ($nblit + $_POST["nblit"] >= $ch["nb_lits"]) {
                         unset($resch1);
                         unset($resre);
                         unset($connexion);
@@ -147,16 +148,19 @@
                 unset($connexion);
             } else {
                 $err = '
-                Vous n\'avez fait aucune résérvation</p>
-                <hr>
-                <p>Pour faire une réservation</p>
-                <a class="login" href="../find">Faire une réservation</a>';
+                Vous n\'avez fait aucune résérvation';
             }
             fin:
             if ($err != 0){
                 echo '<div class="box nores">
                 <p class="errmsg">
                 '.$err.'</p>
+                <hr>
+                <p>Pour faire une réservation</p>
+                <a class="login" href="../find">Faire une réservation</a>
+                <hr>
+                <p>Votre compte</p>
+                <a class="login" href="../account">Votre compte</a>
                 </div>';
             }
             echo '</div>';

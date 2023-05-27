@@ -26,15 +26,14 @@
                 $firstlaunch = 0;
                 $noinfo = false;
                 if (isset($_POST["nom"], $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"])){
-                    $isdortoir;
                     if (!isset($_POST["isdortoir"])){
                         $isdortoir = 0;
                     } else {
-                        $$isdortoir = 1;
+                        $isdortoir = 1;
                     }
                     include "../src/mysql.php";
                     try {
-                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
+                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB, MYSQL_LOG, MYSQL_PWD);
                     } catch (PDOException $e){
                         $err = "Error during server connection";
                         goto fin;
@@ -52,7 +51,6 @@
                     }
                     $id = $res->fetch();
                     $id = $id[0];
-                    echo $id;
                     $reqa = "INSERT INTO chambre (id_hotelch, is_dortoir, prix, nb_lits, img, nb_chambre) VALUES (?, ?, ?, ?, ?, ?)";
                     $resa = $connexion->prepare($reqa);
                     $bool=  $resa->execute([$id, $isdortoir, $_POST["prix"], $_POST["nblit"], $_POST["img"], $_POST["num"]]);

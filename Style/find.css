@@ -120,10 +120,12 @@
     background-color: var(--cl-bleu-clair-clair);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
     margin-top : 20px;
+    border-radius: 10px;
 }
 
 .res {
     width: 95%;
+    height: 250px;
     display: inline-flex;
     gap: 5%;
     justify-content: center;
@@ -157,8 +159,18 @@
     margin: 0;
 }
 
+.divres input{
+    font-family: 'kosan';
+    text-align: left;
+    width: 25%;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--cl-border);
+    box-shadow: 1px 1px 1px #999;
+}
+
 .divres button{
-    margin: 2px;
+    margin: 6px;
     width: 50%;
     height: 20px;
     border-radius: 5px;
@@ -168,6 +180,6 @@
 }
 
 #nblit {
-    width: 8% !important;
+    width: 9% !important;
     appearance: textfield;
 }

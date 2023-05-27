@@ -172,7 +172,6 @@
                     }
                 }
                 $request .= ";";
-                echo $request;
                 $res = $connexion->prepare($request);
                 if (isset($query["name"])){
                     $query["name"] = strtolower($query["name"]);
@@ -208,7 +207,7 @@
                 $reqch1 = 'SELECT * FROM chambre WHERE id_hotelch IN ('.implode (',' ,$allho).')';
                 if (isset($query["nblit"])){
                     $reqch1 .= " AND ";
-                    $reqch1 .= "nb_lits = :nblit";
+                    $reqch1 .= "nb_lits >= :nblit";
                 }
                 $reqch1 .= ';';
                 $resch1 = $connexion->prepare($reqch1);
@@ -258,6 +257,7 @@
                         $valid[$ch["id_chambre"]] = $ch["id_chambre"];
                     }
                 }
+                echo 'test';
                 foreach ($allch1 as $ch) {
                     if (!isset($query["arriver"], $query["depart"])){
                         $valid[$ch["id_chambre"]] = $ch["id_chambre"];
@@ -293,9 +293,10 @@
                             foreach ($allre as $re){
                                 if ($ch["id_chambre"] == $re["id_chambre"]){
                                     if (isset($query["arriver"], $query["depart"])){
-                                        if (($query["arriver"] > $re["date_deb"] && $query["depart"] < $re["date_fin"]) 
-                                            || ($query["arriver"] < $re["date_deb"] && $query["depart"] < $re["date_fin"] && $query["depart"] > $re["date_deb"])
-                                            ||($query["arriver"] > $re["date_deb"] && $query["arriver"] < $re["date_fin"] && $query["depart"] > $re["date_fin"])){
+                                        if (($query["arriver"] >= $re["date_deb"] && $query["depart"] <= $re["date_fin"]) 
+                                            || ($query["arriver"] <= $re["date_deb"] && $query["depart"] <= $re["date_fin"] && $query["depart"] >= $re["date_deb"])
+                                            ||($query["arriver"] >= $re["date_deb"] && $query["arriver"] <= $re["date_fin"] && $query["depart"] >= $re["date_fin"])
+                                            || ($query["arriver"] <= $re["date_deb"] && $query["depart"] >= $re["date_fin"])){
                                             $trigger = 1;
                                         }
                                     } else if (isset($query["arriver"])) {
@@ -309,7 +310,7 @@
                                     }
                                 }
                             }
-                            if ($triger == 0) {
+                            if ($trigger == 0) {
                                 $valid[$ch["id_chambre"]] = $ch["id_chambre"];
                             }
                         }
@@ -382,23 +383,24 @@
                                 <input type="date" min="2022-01-01" max="2040-01-01" id="arriver" name="arriver"
                                 <?php
                                 if (isset($query["arriver"])){
-                                    echo 'value='.$query["arriver"].'';
+                                    echo 'tes';
+                                    echo ' value="'.$query["arriver"].'"';
                                 }
                                 ?>required>
                                 <label for="depart">Date de départ</label>
                                 <input type="date" min="2022-01-01" max="2040-01-01" name="depart" id="depart"
                                 <?php
                                 if (isset($query["depart"])){
-                                    echo 'value='.$query["depart"].'';
+                                    echo 'value="'.$query["depart"].'"';
                                 }
                                 ?>required>
                                 <input type="number" id="nblit" min="0" name="nblit" placeholder="Nb de lit"
                                 <?php
                                 if (isset($query["nblit"])){
-                                    echo 'value='.$query["nblit"].'';
+                                    echo 'value="'.$query["nblit"].'"';
                                 }
                                 ?>required>
-                                <button type="submit" id="searchbut">Réserver</button>
+                                <button type="submit">Réserver</button>
                                 </form>  
                             </div>
                     </article>
