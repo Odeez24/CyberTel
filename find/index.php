@@ -41,6 +41,7 @@
                 goto fin;
             }
             ?>
+            <div id="banner">
                 <div id="searchbanner" class="box">
                     <p>
                         Trouver votre chambre d'hôtel parfaite à Night City.
@@ -88,6 +89,7 @@
                     <form>
                     </form>
                 </div>
+            </div>
             <?php
             $err = 0;
             include "../src/mysql.php";
@@ -257,7 +259,6 @@
                         $valid[$ch["id_chambre"]] = $ch["id_chambre"];
                     }
                 }
-                echo 'test';
                 foreach ($allch1 as $ch) {
                     if (!isset($query["arriver"], $query["depart"])){
                         $valid[$ch["id_chambre"]] = $ch["id_chambre"];
