@@ -32,6 +32,12 @@
     border-radius: 8px;
 }
 
+#searchbanner p {
+    animation: flickerh1 6s infinite alternate;
+    color: var(--cl-bleu-ultra-foncer);
+    font-size: large;
+}
+
 #searchbar{
     font-family: 'kosan';
     display: inline-flex;

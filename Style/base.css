@@ -1,9 +1,8 @@
 .neonText {
-  animation: flicker 4s infinite alternate;
-  color: #fff;
+  animation: flickerh1 4s infinite alternate;
 }
 
-@keyframes flicker {
+@keyframes flickerh1 {
     
   0%, 18%, 22%, 25%, 53%, 57%, 100% {
 
@@ -61,6 +60,9 @@
     --cl-deep-violet: #48023C;
     --cl-dark-dark-violet: #3A243B;
     --cl-jaune: #FEFE00;
+    /* Set neon color */
+    --neon-text-color1: #F96363;
+    --neon-text-color2: #6300FF;
     --font-neon: neon;
 }
 

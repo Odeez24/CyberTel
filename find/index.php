@@ -29,8 +29,9 @@
             ?>
         </header>
         <main>
+            <div id="mainpart">
             <?php
-            echo '<div id="mainpart">';
+            $err = 0;
             if (!isset($_SESSION["nom"])){
                 echo '<div id="nores" class="box">
                             <p>Vous n\'êtes pas connecté !</p>
