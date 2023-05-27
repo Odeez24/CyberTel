@@ -30,9 +30,6 @@ main {
 }
 
 #infoperso {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     width: 80%;
     height: 300px;
     margin: 0;
@@ -42,10 +39,6 @@ main {
 
 #info {
     display: inline-flex;
-    gap: 4%;
-    padding: 10px;
-    text-align: center;
-    align-items: center;
     background-color: var(--cl-bleu-clair-clair);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
     border-radius: 10px;
@@ -62,7 +55,6 @@ main {
     align-items: center;
     margin-bottom: 10px;
     height: 40px;
-    margin: auto 0;
 }
 
 #changemdp input{
@@ -88,8 +80,8 @@ main {
     width: 30px;
     height: 30px;
     position: absolute;
-    margin: 2px;
-    top: 66%
+    margin: 4px;
+    top: 63%
 }
 
 #mainpart{
@@ -149,7 +141,7 @@ main {
 }
 
 .imgres {
-    width: 300px;
+    width: 390px;
     height: 250px;
 }
 

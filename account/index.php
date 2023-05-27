@@ -49,7 +49,7 @@
                     }
                 ?>>
                 <div id="surinfo">
-                    <p>Information Personnel</p>
+                    <h2>Information Personnel</h2>
                     <div id="info">
                         <p>Nom : <?php echo $_SESSION["nom"]?></p>
                         <p>Prenom : <?php echo $_SESSION["prenom"]?></p>
@@ -58,7 +58,7 @@
                         <p>Adresse : <?php echo $_SESSION["adresse"]?></p>
                         <p>Code postal : <?php echo $_SESSION["codepost"]?></p>
                     </div>
-                    <p>Changer de mot de passe</p>
+                    <h3>Changer de mot de passe</h3>
                     <p>Minimum 8 caractères, au moins une majuscule, une minuscule et une lettre</p>
                     <div id="changemdp">
                         <form action="./" method="post">
