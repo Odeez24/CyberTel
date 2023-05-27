@@ -125,7 +125,7 @@
                     }
                     ?> required>
                     <img src="../src/closeeyes.jpg" id="logeyes" class="eyes" onclick="viewmdp()">
-                    <button type="submit">Se connecter</button>
+                    <button class="login" type="submit">Se connecter</button>
                 </form>
                 <hr>
                 <p>Vous n'avez pas de compte ?</p>

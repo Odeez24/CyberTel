@@ -169,7 +169,6 @@
                 }
                 $request = "SELECT id_hotel FROM hotel";
                 if (isset($query["name"]) || isset($query["class"])){
-                    echo "test";
                     $request .= " WHERE ";
                     $first = true;
                     foreach($query as $key => $value){

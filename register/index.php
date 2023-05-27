@@ -45,7 +45,7 @@
                         $err = "Error during server connection";
                         goto fin;
                     }
-                    $req = "INSERT INTO user (nom, prenom, email, password, tel, adresse, codepost) VALUES :nom, :prenom, :email, :mdp, :tel, :adresse, :codepost";
+                    $req = "INSERT INTO user (nom, prenom, email, password, tel, adresse, codepost) VALUES (:nom, :prenom, :email, :mdp, :tel, :adresse, :codepost);";
                     $res = $connexion->prepare($req);
                     $res->bindParam(":nom", $_POST["nom"]);
                     $res->bindParam(":prenom", $_POST["prenom"]);
@@ -162,7 +162,7 @@
                         echo "class=\"err\"";
                     }
                     ?>required>
-                    <button type="submit">S'inscrire</button>
+                    <button class="login" type="submit">S'inscrire</button>
                 </form>
             <hr>
             <p>Vous avez déjà un compte ?</p>

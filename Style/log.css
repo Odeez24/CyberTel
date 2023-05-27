@@ -48,28 +48,6 @@ main {
     margin-right: auto;
 }
 
-.boxlog button {
-    width: 50%;
-    height: 20px;
-    border-radius: 5px;
-    background-color: var(--cl-bleu-ultra-foncer);
-    color: var(--cl-jaune);
-    border: var(--cl-border);
-}
-
-.login {
-    display: block;
-    text-decoration: none;
-    width: 50%;
-    height: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    background-color: var(--cl-bleu-ultra-foncer);
-    color: var(--cl-jaune);
-    border: var(--cl-border);
-}
-
 #codepost {
     appearance: textfield;
 }
@@ -80,13 +58,13 @@ main {
 
 #regeyes {
     position: absolute;
-    top: 48%;
+    top: 47%;
     left: 80%;
 }
 
 #logeyes {
     position: absolute;
-    top: 44%;
+    top: 42%;
     left: 80%;
 }
 
