@@ -18,11 +18,9 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 610px;
     margin: 0;
-    background: url(../src/fondmain.jpg) no-repeat;
-    background-position: center bottom;
-    background-size: cover;
+    background: url(../src/findfont.jpg) repeat-x;
+    background-position: center top;
 }
 
 #searchbanner {
@@ -96,31 +94,80 @@
 }
 
 #findbox {
-    background-color: var(--cl-vert-clair);
     display: flex;
-    flex-flow: column;
+    flex: 2 1 100px;
+    flex-flow: wrap;
+    gap: 5%;
+    background-color: var(--cl-vert-clair);
+    width: 90%;
+    margin-bottom: 10px;
+    margin-top: 3%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    z-index: 999;
 }
 
-.res {
+.rest {
     width: 45%;
-    height: 250px;
-    display: flex;
+    height: 300px;
+    display: block;
     gap: 5%;
     padding: 10px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
     background-color: var(--cl-bleu-clair-clair);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
     margin-top : 20px;
 }
 
-.imgres {
-    width: 100px;
-    height: 80px;
+.res {
+    width: 95%;
+    display: inline-flex;
+    gap: 5%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
-.infores {
+.imgch {
+    width: 300px;
+    height: 250px;
+}
+
+.infoch {
     text-align: center;
     justify-content: center;
     align-items: center;
     display: flexbox;
     flex-direction: column;
+}
+
+.divres {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.formres {
+    margin: 0;
+}
+
+.divres button{
+    margin: 2px;
+    width: 50%;
+    height: 20px;
+    border-radius: 5px;
+    background-color: var(--cl-bleu-ultra-foncer);
+    color: var(--cl-jaune);
+    border: var(--cl-border);
+}
+
+#nblit {
+    width: 8% !important;
+    appearance: textfield;
 }

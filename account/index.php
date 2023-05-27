@@ -1,6 +1,5 @@
 <?php
     session_start();
-    session_start();
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -15,7 +14,6 @@
         <script src="../script/jquery-3.7.0.min.js"></script>
         <script src="../script/account.js"></script>
         <link href="../Style/account.css" rel="stylesheet">
-        <link href="../Style/base.css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -83,7 +81,7 @@
                     $err = 0;
                     include "../src/mysql.php";
                     try {
-                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB.'', MYSQL_LOG, MYSQL_PWD);
+                        $connexion = new PDO ('mysql:host='.MYSQL_HOST.';port=3306;dbname='.MYSQL_DB, MYSQL_LOG, MYSQL_PWD);
                     } catch (PDOException $e){
                         session_destroy();
                         $_SESSION = [];
@@ -114,33 +112,50 @@
                             <a href="../find" class="login">Reserver votre chambre !</a>
                         </div>';
                         goto fin;
-                    } else {
-                        echo '<div id="rest" class="box">
-                            <p>Vos réservations</p>
-                            <hr>';
+                    }
+                    ?>
+                    <p id="titreres">Vos réservations</p>
+                    <div id="rest" class="box">
+                    <?php
                         foreach ($allresv as $resv) {
                             echo '<article class="res">';
-                            $reqch = "SELECT * FROM Chambre WHERE id_chambre = '{$resv["id_chambre"]}';";
+                            $reqch = 'SELECT * FROM chambre WHERE id_chambre = '.$resv["id_chambre"];
                             $resch = $connexion->prepare($reqch);
                             $boolch =  $resch->execute();
-                            $reqhotel = "SELECT * FROM Hotel WHERE id_hotel = '{$chambre["id_hotel"]}';";
+                            if (!$boolch){
+                                session_destroy();
+                                $_SESSION = [];
+                                unset($resch);
+                                unset($connexion);
+                                $err = "Error during server communication";
+                                goto fin;
+                            }
+                            $chambre = $resch->fetch();
+                            $reqhotel = "SELECT * FROM hotel WHERE id_hotel = '{$chambre["id_hotelch"]}';";
                             $reshotel = $connexion->prepare($reqhotel);
                             $boolho =  $reshotel->execute();
-                            if (!$boolch || !$boolho){
+                            if (!$boolho){
                                 session_destroy();
                                 $_SESSION = [];
                                 unset($resch);
                                 unset($reshotel);
                                 unset($connexion);
-                                echo "Error during server communication";
+                                $err = "Error during server communication";
                                 goto fin;
                             }
-                            $chambre = $resch->fetch();
                             $hotel = $reshotel->fetch();
-                            echo '<img src="../src/imgchambre/".$chambre[\"img\"].".jpg" alt="Image de la chambre" class="imgres">
+                            echo '<img src="../src/imgchambre/'.$chambre["img"].'" alt="Image de la chambre" class="imgres">
                                 <div class="infores">
                                     <p>Hôtel : '.$hotel["nom"].'</p>
-                                    <p>Qualité : '.$hotel["qualiter"].'</p>
+                                    <p>Qualité : ';
+                                    if ($hotel["qualite"] == 1){
+                                        echo 'Luxe';
+                                    } else if ($hotel["qualite"] == 2){
+                                        echo 'Moyen de Gamme';
+                                    } else {
+                                        echo 'Bas de Gamme';
+                                    }
+                                    echo '</p>
                                     <p>Adresse : '.$hotel["adresse"].'</p>
                                 </div>
                                 <div class="infores">
@@ -148,18 +163,17 @@
                                     if ($chambre["is_dortoir"] == true){
                                         echo 'Dortoir';
                                     } else {
-                                        echo 'Chambre privative';
+                                        echo 'Privative';
                                     }
                             echo '</p>
-                                    <p>Arrivée : '.$resv["date_arrivee"].'</p>
-                                    <p>Départ : '.$resv["date_depart"].'</p>
+                                    <p>Arrivée : '.$resv["date_deb"].'</p>
+                                    <p>Départ : '.$resv["date_fin"].'</p>
                                     <p>Nombre de personne : '.$resv["nb_lit"].'</p>
-                                    <p>Prix : '.$resv["prix"].'€</p>
+                                    <p>Prix : '.$chambre["prix"].'€</p>
                                  </div>';
                             echo '</article>';
                         }
                         echo '</div>';
-                    }
 
                     fin:
                 ?>

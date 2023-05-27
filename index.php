@@ -9,7 +9,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="./Style/main.css" rel="stylesheet">
-        <link href="./Style/base.css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -32,19 +31,44 @@
                     <p>
                         Trouver votre chambre d'hôtel parfaite à Night City.
                     </p>
-                    <form id="searchbar" action="./find" method="post">
-                        <input type="text" id="name" placeholder="Nom de l'hôtel">
-                        <select id="classification">
-                            <option>Qualité de l'hôtel</option>
+                    <form id="searchbar" action="./find/index.php" method="post">
+                    <input type="text" id="name" name="name" placeholder="Nom de l'hôtel"
+                        <?php
+                        if (isset($_POST["name"])) {
+                            echo 'value="'.$_POST["name"].'"';
+                        }
+                        ?>>
+                        <select id="class" name="class"
+                        <?php
+                        if (isset($_POST["class"])) {
+                            echo 'value="'.$_POST["class"].'"';
+                        }
+                        ?>> 
+                            <option value="-1">Qualité de l'hôtel</option>
                             <option value="3">Luxe</option>
-                            <option value="2">Moyen</option>
-                            <option value="1">Bas</option>
+                            <option value="2">Moyen de gamme</option>
+                            <option value="1">Bas de gamme</option>
                         </select>
                         <label for="arriver">Date d'arrivée</label>
-                        <input type="date" min="2022-01-01" max="2040-01-01" id="arrivee">
+                        <input type="date" min="2022-01-01" max="2040-01-01" name="arriver" id="arriver"
+                        <?php
+                        if (isset($_POST["arriver"])) {
+                            echo 'value="'.$_POST["arriver"].'"';
+                        }
+                        ?>>
                         <label for="depart">Date de départ</label>
-                        <input type="date" min="2022-01-01" max="2040-01-01"  id="depart">
-                        <input type="number" id="nblit" min="0" placeholder="Lits">
+                        <input type="date" min="2022-01-01" max="2040-01-01"  id="depart" name="depart"
+                        <?php
+                        if (isset($_POST["depart"])) {
+                            echo 'value="'.$_POST["depart"].'"';
+                        }
+                        ?>>
+                        <input type="number" id="nblit" min="0" placeholder="Lits" name="nblit"
+                        <?php
+                        if (isset($_POST["nblit"])) {
+                            echo 'value="'.$_POST["nblit"].'"';
+                        }
+                        ?>>
                         <button type="submit" id="searchbut">Rechercher</button>
                     </form>
                     <form>

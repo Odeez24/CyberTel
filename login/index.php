@@ -14,7 +14,6 @@
         <script src="../script/jquery-3.7.0.min.js"></script>
         <script src="../script/log.js"></script>
         <link href="../Style/log.css" rel="stylesheet">
-        <link href="../Style/base.css" rel="stylesheet">
     </head>
     <body>
         <header>

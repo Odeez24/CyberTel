@@ -12,7 +12,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../Style/add.css" rel="stylesheet">
-        <link href="../Style/base.css" rel="stylesheet">
     </head>
     <body>
         <header>

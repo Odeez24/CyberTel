@@ -36,6 +36,8 @@
                     }
                     $req = "INSERT INTO hotel (nom, adresse, qualite, etoile) VALUES (?, ?, ?, ?)";
                     $res = $connexion->prepare($req);
+                    $_POST["nom"] = strtolower($_POST["nom"]);
+                    $_POST["nom"] = str_replace(" ", "", $_POST["nom"]);
                     $bool=  $res->execute([$_POST["nom"], $_POST["adresse"], $_POST["class"], $_POST["note"]]);
                     if (!$bool){
                         unset($res);
