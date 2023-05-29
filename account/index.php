@@ -36,7 +36,7 @@
             <a href="../index.php" id="title" class="neonText">Cybertel</a>
             <?php
                 if (isset($_SESSION["nom"])) {
-                    echo '<a id="account" class="log" id="loga" href="./account">'.$_SESSION["nom"].' '.$_SESSION["prenom"].'</a>';
+                    echo '<a id="account" class="log" id="loga" href="./">'.$_SESSION["nom"].' '.$_SESSION["prenom"].'</a>';
                 }
             ?>
             <a href="../logout/logout.php" class="log" id="logout">Déconnexion</a>
