@@ -40,6 +40,8 @@
                     }
                     $req = "SELECT id_hotel FROM hotel WHERE nom = :idhot;";
                     $res = $connexion->prepare($req);
+                    $_POST["nom"] = strtolower($_POST["nom"]);
+                    $_POST["nom"] = str_replace(" ", "", $_POST["nom"]);
                     $res->bindParam(':idhot', $_POST["nom"]);
                     $bool = $res->execute();
                     if (!$bool){
